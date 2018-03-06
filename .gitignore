@@ -1,0 +1,11 @@
+/target
+/.bazel_path
+/.classpath
+/.settings
+/.project
+/.buckd
+/.DS_Store
+/bazel-*
+/buck-cache
+/buck-out
+*.iml
