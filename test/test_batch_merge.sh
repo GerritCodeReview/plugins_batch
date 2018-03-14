@@ -214,6 +214,15 @@ result "$GROUP" "$delete"
 result "$GROUP retry" "$delete"
 
 
+setupGroup "ls-batches" "List Batches" # -------------
+
+ch1=$(create_change "$REF_BRANCH" "$FILE_A") || exit
+bjson=$(batchssh merge-change --close "$ch1",1)
+list=$(batchssh ls-batches)
+echo "$list"| grep '"id"'| grep -q "$(b_id)"
+result "$GROUP" "$list"
+
+
 setupGroup "independent clean" "Independent changes, clean merge" # ------------
 
 ch1=$(create_change "$REF_BRANCH" "$FILE_A") || exit
