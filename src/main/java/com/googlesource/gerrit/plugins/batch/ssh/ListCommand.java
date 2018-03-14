@@ -11,14 +11,28 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 package com.googlesource.gerrit.plugins.batch.ssh;
 
-import com.google.gerrit.sshd.PluginCommandModule;
+import com.google.gerrit.sshd.BaseCommand;
+import com.google.gerrit.sshd.CommandMetaData;
+import com.google.inject.Inject;
+import com.googlesource.gerrit.plugins.batch.ListBatches;
+import org.apache.sshd.server.Environment;
 
-public class SshModule extends PluginCommandModule {
+@CommandMetaData(name = "ls-batches", description = "List batches visible to caller")
+public class ListCommand extends BaseCommand {
+  @Inject private ListBatches impl;
+
   @Override
-  protected void configureCommands() {
-    command(MergeChangeCommand.class);
-    command(ListCommand.class);
+  public void start(final Environment env) {
+    startThread(
+        new CommandRunnable() {
+          @Override
+          public void run() throws Exception {
+            parseCommandLine(impl);
+            impl.display(out);
+          }
+        });
   }
 }
