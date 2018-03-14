@@ -68,6 +68,11 @@ public class Batch {
     this.owner = owner;
   }
 
+  /** Create a barebones entry for listing, not to build with */
+  public Batch(String id) {
+    this.id = id;
+  }
+
   /** Get a non-null list without modifying the batch. */
   public List<Destination> listDestinations() {
     if (destinations == null) {
