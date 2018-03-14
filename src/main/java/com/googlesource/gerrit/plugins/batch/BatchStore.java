@@ -17,6 +17,7 @@ import com.google.gerrit.reviewdb.client.Branch;
 import com.google.gerrit.reviewdb.client.File;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.config.AllProjectsName;
+import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.meta.GitFile;
 import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.gerrit.server.util.RefUpdater;
@@ -24,27 +25,46 @@ import com.google.gson.Gson;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.batch.exception.NoSuchBatchException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.Date;
+import java.util.List;
 import javax.inject.Singleton;
 import org.eclipse.jgit.errors.ConfigInvalidException;
+import org.eclipse.jgit.lib.Repository;
 
 @Singleton
 public class BatchStore {
   public static final String BATCHES_REF = "refs/meta/batch/batches/";
   public static final String FILE_NAME = "batch.json";
 
+  protected final GitRepositoryManager repoManager;
   protected final Project.NameKey project;
   protected final GitFile.Factory gitFileFactory;
   protected final RefUpdater refUpdater;
   protected final Gson gson = new Gson();
 
   @Inject
-  public BatchStore(AllProjectsName project, GitFile.Factory gitFileFactory, RefUpdater refUpdater)
-      throws IOException {
+  public BatchStore(
+      GitRepositoryManager repoManager,
+      AllProjectsName project,
+      GitFile.Factory gitFileFactory,
+      RefUpdater refUpdater) {
+    this.repoManager = repoManager;
     this.project = project;
     this.gitFileFactory = gitFileFactory;
     this.refUpdater = refUpdater;
+  }
+
+  /** Returns barebones batch objects for listings */
+  public List<Batch> find() throws IOException {
+    List<Batch> batches = new ArrayList<>();
+    try (Repository repo = repoManager.openRepository(project)) {
+      for (String batchId : repo.getRefDatabase().getRefs(BATCHES_REF).keySet()) {
+        batches.add(new Batch(batchId));
+      }
+    }
+    return batches;
   }
 
   public void save(Batch batch) throws IOException, NoSuchProjectException {
