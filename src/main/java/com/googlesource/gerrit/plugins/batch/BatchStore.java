@@ -48,6 +48,10 @@ public class BatchStore {
   }
 
   public void save(Batch batch) throws IOException, NoSuchProjectException {
+    if (batch.state == Batch.State.DELETED) {
+      refUpdater.delete(getBranch(batch.id));
+      return;
+    }
     if (batch.version != 0) {
       throw new ConcurrentModificationException();
     }
