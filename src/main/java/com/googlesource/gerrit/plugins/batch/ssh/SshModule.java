@@ -23,5 +23,6 @@ public class SshModule extends PluginCommandModule {
     install(new FactoryModuleBuilder().build(GitFile.Factory.class));
 
     command(MergeChangeCommand.class);
+    command(DeleteCommand.class);
   }
 }
