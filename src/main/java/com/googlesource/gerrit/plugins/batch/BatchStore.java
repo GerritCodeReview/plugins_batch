@@ -14,6 +14,7 @@
 package com.googlesource.gerrit.plugins.batch;
 
 import com.google.gerrit.server.config.SitePaths;
+import com.google.gerrit.server.submit.IntegrationException;
 import com.google.gson.Gson;
 import com.google.inject.Inject;
 import java.io.IOException;
@@ -21,6 +22,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.util.ConcurrentModificationException;
 import javax.inject.Singleton;
@@ -48,6 +50,22 @@ public class BatchStore {
     }
     batch.version++;
     Files.write(base.resolve(batch.id), json.getBytes(ENC));
+  }
+
+  public Batch read(String id) throws IOException, IntegrationException {
+    try {
+      return gson.fromJson(readFile(base.resolve(id)), Batch.class);
+    } catch (NoSuchFileException e) {
+      throw new IntegrationException(id);
+    }
+  }
+
+  protected static String readFile(Path file) throws IOException {
+    StringBuilder buffer = new StringBuilder();
+    for (String line : Files.readAllLines(file, ENC)) {
+      buffer.append(line);
+    }
+    return buffer.toString();
   }
 
   /* A drop in replacement for Files.createDirectories that works even when the

@@ -19,5 +19,6 @@ public class SshModule extends PluginCommandModule {
   @Override
   protected void configureCommands() {
     command(MergeChangeCommand.class);
+    command(DeleteCommand.class);
   }
 }
