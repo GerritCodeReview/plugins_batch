@@ -26,7 +26,8 @@ import java.util.UUID;
 public class Batch {
   public enum State {
     OPEN,
-    CLOSED;
+    CLOSED,
+    DELETED;
   }
 
   public static class Change {
