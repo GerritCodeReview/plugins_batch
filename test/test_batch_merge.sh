@@ -203,6 +203,17 @@ result_out "$GROUP state" "CLOSED" "$(b_state)"
 result_out "$GROUP change_state" "NEW" "$(query_by "$qchange" "status")"
 
 
+setupGroup "delete" "Batch Delete" # -------------
+
+ch1=$(create_change "$REF_BRANCH" "$FILE_A") || exit
+bjson=$(batchssh merge-change --close "$ch1",1)
+id=$(b_id)
+delete=$(batchssh delete "$id")
+result "$GROUP" "$delete"
+! delete=$(batchssh delete "$id")
+result "$GROUP retry" "$delete"
+
+
 setupGroup "independent clean" "Independent changes, clean merge" # ------------
 
 ch1=$(create_change "$REF_BRANCH" "$FILE_A") || exit
