@@ -1,4 +1,4 @@
-// Copyright (C) 2016 The Android Open Source Project
+// Copyright (C) 2018 The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11,18 +11,14 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-package com.googlesource.gerrit.plugins.batch;
 
-import com.google.gerrit.extensions.config.FactoryModule;
-import com.google.gerrit.server.git.meta.GitFile;
-import com.googlesource.gerrit.plugins.batch.util.MergeBranch;
-import com.googlesource.gerrit.plugins.batch.util.MergeBuilder;
+package com.googlesource.gerrit.plugins.batch.rest;
 
-public class Module extends FactoryModule {
+import com.google.gerrit.httpd.plugins.HttpPluginModule;
+
+public class HttpModule extends HttpPluginModule {
   @Override
-  protected void configure() {
-    factory(MergeBranch.Factory.class);
-    factory(MergeBuilder.Factory.class);
-    factory(GitFile.Factory.class);
+  protected void configureServlets() {
+    serve("/batches/").with(BatchRestApiServlet.class);
   }
 }
