@@ -15,12 +15,13 @@
 package com.googlesource.gerrit.plugins.batch;
 
 import com.google.gerrit.reviewdb.client.RefNames;
-import com.google.gerrit.server.git.meta.VersionedMetaData;
 import com.google.gerrit.server.project.ProjectState;
 import java.io.IOException;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.lib.CommitBuilder;
 import org.eclipse.jgit.lib.Config;
+import com.google.gerrit.server.git.VersionedMetaData;
+import com.google.gerrit.server.git.MetaDataUpdate;
 
 /** Configuration file in the projects refs/meta/config branch. */
 public class ProjectLevelConfig extends VersionedMetaData {
