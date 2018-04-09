@@ -10,6 +10,7 @@ gerrit_plugin(
         "Implementation-URL: https://gerrit-review.googlesource.com/#/admin/projects/plugins/batch",
         "Gerrit-Module: com.googlesource.gerrit.plugins.batch.Module",
         "Gerrit-SshModule: com.googlesource.gerrit.plugins.batch.ssh.SshModule",
+        "Gerrit-HttpModule: com.googlesource.gerrit.plugins.batch.rest.HttpModule",
     ],
     resources = glob(["src/main/resources/**/*"]),
     deps = [
