@@ -25,6 +25,7 @@ system (jenkins gerrit user) may start by opening a batch,
 merging changes to it, and closing the batch, all in one simple
 command like this:
 
+<a name="batchexample"></a>
 ```
 $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ merge-change 123,3 456,7 --close
   {
