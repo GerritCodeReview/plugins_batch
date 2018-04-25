@@ -221,6 +221,9 @@ bjson=$(batchssh merge-change --close "$ch1",1)
 list=$(batchssh ls-batches)
 echo "$list"| grep '"id"'| grep -q "$(b_id)"
 result "$GROUP" "$list"
+listinfo=$(batchssh ls-batches --include-batch-info)
+echo "$listinfo"| grep -q '"last_modified'
+result "$GROUP last_modified" "listResult: $listinfo"
 
 
 setupGroup "independent clean" "Independent changes, clean merge" # ------------
