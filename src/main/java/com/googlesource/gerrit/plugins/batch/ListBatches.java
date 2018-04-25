@@ -19,18 +19,23 @@ import com.google.gerrit.common.data.GlobalCapability;
 import com.google.gerrit.extensions.annotations.RequiresCapability;
 import com.google.gerrit.server.OutputFormat;
 import com.google.gson.reflect.TypeToken;
-import com.google.gwtorm.server.OrmException;
 import com.google.inject.Inject;
+import com.googlesource.gerrit.plugins.batch.exception.NoSuchBatchException;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
+import org.kohsuke.args4j.Option;
 
 @RequiresCapability(GlobalCapability.ADMINISTRATE_SERVER)
 public class ListBatches {
+  @Option(name = "--include-batch-info", usage = "include addtional information for every batch")
+  protected boolean includeBatchInfo;
+
   protected final BatchStore store;
 
   @Inject
@@ -38,7 +43,7 @@ public class ListBatches {
     this.store = store;
   }
 
-  public void display(OutputStream displayOutputStream) throws IOException, OrmException {
+  public void display(OutputStream displayOutputStream) throws IOException, NoSuchBatchException {
     try {
       PrintWriter stdout =
           new PrintWriter(new BufferedWriter(new OutputStreamWriter(displayOutputStream, UTF_8)));
@@ -55,7 +60,11 @@ public class ListBatches {
     }
   }
 
-  public List<Batch> getBatches() throws IOException {
-    return store.find();
+  public List<Batch> getBatches() throws IOException, NoSuchBatchException {
+    List<Batch> batches = new ArrayList<Batch>();
+    for (Batch batch : store.find(includeBatchInfo)) {
+      batches.add(batch);
+    }
+    return batches;
   }
 }

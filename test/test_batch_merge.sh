@@ -207,9 +207,11 @@ setupGroup "ls-batches" "List Batches" # -------------
 
 ch1=$(create_change "$REF_BRANCH" "$FILE_A") || exit
 bjson=$(batchssh merge-change --close "$ch1",1)
-list=$(batchssh ls-batches)
+list=$(batchssh ls-batches --include-batch-info)
 echo "$list"| grep '"id"'| grep -q "$(b_id)"
 result "$GROUP" "$list"
+echo "$list"| grep -q '"last_modified'
+result "$GROUP last_modified" "listResult: $list"
 
 
 setupGroup "independent clean" "Independent changes, clean merge" # ------------

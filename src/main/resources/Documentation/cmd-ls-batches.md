@@ -9,7 +9,15 @@ SYNOPSIS
 --------
 ```
 ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ ls-batches
+  [--include-batch-info]
+  <query>
 ```
+
+OPTIONS
+-----------
+**\-\-include-batch-info**
+
+: Include addtional information for every batch. ([example batch info](about.md#batchexample))
 
 DESCRIPTION
 -----------
