@@ -22,6 +22,30 @@
       "revId": "a0c53a94b6dc06dad3f3a6e62bd2003fccbec698",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ec00b15_c5748068",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2018-05-02T21:57:32Z",
+      "side": 1,
+      "message": "No concrete plan, but we\u0027re trying to get legal approval to be able to contribute to the Gerrit Trigger Plugin and Luca\u0027s Gerrit plugin.",
+      "parentUuid": "f6e58828_07cac73f",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 31
+      },
+      "revId": "a0c53a94b6dc06dad3f3a6e62bd2003fccbec698",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
