@@ -59,11 +59,16 @@ public class BatchStore {
   }
 
   /** Returns a list of batch objects */
-  public List<Batch> find(boolean includeBatchInfo) throws IOException, NoSuchBatchException {
+  public List<Batch> find(boolean includeBatchInfo) throws IOException {
     List<Batch> batches = new ArrayList<>();
     try (Repository repo = repoManager.openRepository(project)) {
       for (Map.Entry<String, Ref> entry : repo.getRefDatabase().getRefs(BATCHES_REF).entrySet()) {
-        batches.add((includeBatchInfo == true) ? read(entry.getKey()) : new Batch(entry.getKey()));
+        try {
+          batches.add(
+              (includeBatchInfo == true) ? read(entry.getKey()) : new Batch(entry.getKey()));
+        } catch (NoSuchBatchException e) {
+          continue;
+        }
       }
     }
     return batches;

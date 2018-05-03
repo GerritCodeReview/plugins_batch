@@ -13,15 +13,11 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.batch.ssh;
 
-import com.google.gerrit.server.git.meta.GitFile;
 import com.google.gerrit.sshd.PluginCommandModule;
-import com.google.inject.assistedinject.FactoryModuleBuilder;
 
 public class SshModule extends PluginCommandModule {
   @Override
   protected void configureCommands() {
-    install(new FactoryModuleBuilder().build(GitFile.Factory.class));
-
     command(MergeChangeCommand.class);
     command(DeleteCommand.class);
     command(ListCommand.class);
