@@ -10,6 +10,7 @@ SYNOPSIS
 ```
 ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ ls-batches
   [--include-batch-info]
+  <query>
 ```
 
 OPTIONS
@@ -30,6 +31,21 @@ of the privileged *Administrators* group.
 SCRIPTING
 ---------
 This command is intended to be used in scripts.
+
+QUERIES
+-------
+Batches can be queried using a syntax that mimicks the change
+query syntax.  Operators act as restrictions on the search.  As
+more operators are added to the same query string, they further
+restrict the returned results.
+
+Operators
+---------
+<a name="is:expired"></a>
+*is:expired*
+
+: Batches which have expired ([see batch cleanup](about.md#cleanup))
+
 
 EXAMPLES
 --------
