@@ -5,17 +5,26 @@ source "$CUR_DIR/lib_batch_helpers.sh"
 source "$CUR_DIR/lib_batch_json.sh"
 source "$CUR_DIR/lib_result.sh"
 
-gcurl() { # method additional_endpoint
+gcurl() { # data endpoint
     local method=$1; shift
-    curl -X "$method" --user "$USERPASS" --silent --output /dev/null --write-out %{http_code} "$ENDPOINT""$@"
+    local end=$1; shift
+    curl -X "$method" --user "$USERPASS" $@ "$ENDPOINT$end"
 }
 
-get() { # additional_endpoint
-    gcurl GET "$@"
+get() { # additional_endpoint options
+    local end=$1; shift
+    gcurl GET "$end" "$@"
 }
 
-delete() { # additional_endpoint
-    gcurl DELETE "$@"
+delete() { # additional_endpoint options
+    local end=$1; shift
+    gcurl DELETE "$end" "$@"
+}
+
+post() { # additional_endpoint data options
+    local end=$1; shift
+    local data=$1; shift
+    gcurl POST "$end" "--data $data" "$@"
 }
 
 usage() { # [error_message]
@@ -69,6 +78,7 @@ parseArgs() {
 # available through the rest api
 parseArgs "$@"
 
+SILENT_OUTPUT=(--silent '--output /dev/null' '--write-out %{http_code}')
 GITURL=ssh://$SERVER:29418/$PROJECT
 git ls-remote --heads "$GITURL" >/dev/null || usage "invalid project/server"
 
@@ -79,45 +89,65 @@ q git init "$REPO_DIR"
 GIT_DIR="$REPO_DIR/.git"
 HOOK_DIR="$GIT_DIR/hooks"
 FILE_A="$REPO_DIR/fileA"
+FILE_B="$REPO_DIR/fileB"
 
 RESULT=0
 
 setupGroup "endpoint" "RestAPI - Endpoint Check" # -------------
 # Test the endpoint to make sure it is there, should return 302 "found"
 # https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/302
-STATUS="$(get)"
+STATUS="$(get "" ${SILENT_OUTPUT[*]})"
 result_out "$GROUP" "302" "$STATUS"
 
+setupGroup "merge-change" "RestAPI - Merge Change" # -------------
+
+# CREATE BATCH - Merge Change
+# https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200
+ch1=$(create_change "$REF_BRANCH" "$FILE_A") || exit
+
+postdata='{"batchInput":{"message":"commitmessage","close":true},"mergeChangeInput":{"patchSets":["'$ch1',1"]}}'
+STATUS="$(post "batches/" "$postdata" ${SILENT_OUTPUT[*]})"
+result_out "$GROUP merge change" "200" "$STATUS"
+
+# CREATE BATCH - Merge Multiple Changes
+# https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200
+ch1=$(create_change "$REF_BRANCH" "$FILE_A") || exit
+ch2=$(create_change "$REF_BRANCH" "$FILE_B") || exit
+
+postdata='{"batchInput":{"message":"commitmessage","close":true},"mergeChangeInput":{"patchSets":["'$ch1',1","'$ch2',1"]}}'
+STATUS="$(post "batches/" "$postdata" ${SILENT_OUTPUT[*]})"
+result_out "$GROUP merge changes" "200" "$STATUS"
 
 setupGroup "delete" "RestAPI - Batch Delete" # -------------
 
 # DELETE BATCH - Valid Batch ID Provided
 # https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200
 ch1=$(create_change "$REF_BRANCH" "$FILE_A") || exit
-bjson=$(batchssh merge-change --close "$ch1",1)
+postdata='{"batchInput":{"message":"commitmessage","close":true},"mergeChangeInput":{"patchSets":["'$ch1',1"]}}'
+bjson=$(post "batches/" "$postdata" ${SILENT_OUTPUT[0]})
 id=$(b_id)
 
-STATUS="$(delete "batches/$id")"
+STATUS="$(delete "batches/$id" ${SILENT_OUTPUT[*]})"
 result_out "$GROUP valid batch id" "200" "$STATUS"
 
 # DELETE BATCH - Invalid Batch ID Provided
 # https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
 ch1=$(create_change "$REF_BRANCH" "$FILE_A") || exit
-bjson=$(batchssh merge-change --close "$ch1",1)
+postdata='{"batchInput":{"message":"commitmessage","close":true},"mergeChangeInput":{"patchSets":["'$ch1',1"]}}'
+STATUS="$(post "batches/" "$postdata" ${SILENT_OUTPUT[*]})"
 id="1234567890"
 
-STATUS="$(delete "batches/$id")"
+STATUS="$(delete "batches/$id" ${SILENT_OUTPUT[*]})"
 result_out "$GROUP invalid batch id" "400" "$STATUS"
 
 # DELETE BATCH - Valid rest endpoint but not for DELETE
 # https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405
-STATUS="$(delete "batches")"
+STATUS="$(delete "batches" ${SILENT_OUTPUT[*]})"
 result_out "$GROUP invalid endpoint" "405" "$STATUS"
 
 # DELETE BATCH - No Batch ID Provided
 # https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
-STATUS="$(delete "batches/")"
+STATUS="$(delete "batches/" ${SILENT_OUTPUT[*]})"
 result_out "$GROUP no batch id" "400" "$STATUS"
-
 
 exit $RESULT

@@ -27,6 +27,7 @@ public class Module extends FactoryModule {
     factory(MergeBranch.Factory.class);
     factory(MergeBuilder.Factory.class);
     factory(GitFile.Factory.class);
+    factory(MergeChange.Factory.class);
 
     bind(LifecycleListener.class)
         .annotatedWith(UniqueAnnotations.create())
