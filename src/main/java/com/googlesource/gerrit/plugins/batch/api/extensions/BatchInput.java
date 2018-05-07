@@ -11,14 +11,13 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+package com.googlesource.gerrit.plugins.batch.api.extensions;
 
-package com.googlesource.gerrit.plugins.batch.rest;
+public class BatchInput {
+  // close batch on merge success
+  public Boolean close;
+  // commit message to use when applying a change
+  public String message;
 
-import com.google.gerrit.httpd.plugins.HttpPluginModule;
-
-public class HttpModule extends HttpPluginModule {
-  @Override
-  protected void configureServlets() {
-    serve("/batches", "/batches/*").with(BatchRestApiServlet.class);
-  }
+  public BatchInput() {}
 }

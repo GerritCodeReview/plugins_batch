@@ -1,6 +1,41 @@
 @PLUGIN@ - API JSON Entities
 ==============================
 
+
+### JSON Input Entities
+
+#### MergeInput
+
+The `MergeInput` entity is the top level entity when merging changes to create a batch.
+
+* `batchInput` _BatchInput_: Batch specific input options. See [BatchInput](#batchinput)
+* `mergeChangeInput` _MergeChangeInput_: Merge Change specific input options. See [MergeChangeInput](#mergechangeinput)
+* `mergeOptionsInput` _MergeOptionsInput_: Merge input options. See [MergeOptionsInput](#mergeoptionsinput)
+
+
+#### BatchInput
+
+The `BatchInput` entity contains batch specific input options used when creating a batch.
+
+* `close` _boolean_: Close batch on merge success. _(true|false)_
+* `message` _string_: Commit message to use when applying a change.
+
+
+#### MergeChangeInput
+
+The `MergeChangeInput` entity contains merge change specific input used when creating a batch.
+
+* `patchSets` _string_: Array of PatchSets to merge. _(["12,3","45,6"])_
+
+
+#### MergeOptionsInput
+
+The `MergeOptionsInput` entity contains merge options used when creating a batch.
+
+* `mergeMode` _string_: Merge mode to use, must be one of the listed. _(ff|noff|ffOnly|cherryPick)_
+* `strategy` _string_: Use the given merge strategy, must be one of the listed. _(ours|theirs|simple[-two-way-in-core]|resolve)_
+
+
 ### JSON Info Entities
 
 #### BatchInfo

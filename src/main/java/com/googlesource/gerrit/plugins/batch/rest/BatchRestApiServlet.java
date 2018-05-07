@@ -23,11 +23,15 @@ import com.google.gerrit.server.permissions.GlobalPermission;
 import com.google.gerrit.server.permissions.PermissionBackend;
 import com.google.gerrit.server.permissions.PermissionBackendException;
 import com.google.gerrit.server.project.NoSuchProjectException;
+import com.google.gson.Gson;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.googlesource.gerrit.plugins.batch.BatchRemover;
+import com.googlesource.gerrit.plugins.batch.MergeChange;
+import com.googlesource.gerrit.plugins.batch.api.extensions.MergeInput;
 import com.googlesource.gerrit.plugins.batch.exception.NoSuchBatchException;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -47,6 +51,9 @@ public class BatchRestApiServlet extends HttpServlet {
   protected final String pluginName;
   protected final String pluginUrl;
   protected final PermissionBackend permissionBackend;
+  protected final MergeChange.Factory mergeChangeFactory;
+
+  protected final Gson gson = new Gson();
 
   @Inject
   BatchRestApiServlet(
@@ -54,12 +61,14 @@ public class BatchRestApiServlet extends HttpServlet {
       BatchRemover batchRemover,
       @PluginName String pluginName,
       @PluginCanonicalWebUrl String pluginUrl,
-      PermissionBackend permissionBackend) {
+      PermissionBackend permissionBackend,
+      MergeChange.Factory mergeChangeFactory) {
     this.userProvider = userProvider;
     this.batchRemover = batchRemover;
     this.pluginName = pluginName;
     this.pluginUrl = pluginUrl;
     this.permissionBackend = permissionBackend;
+    this.mergeChangeFactory = mergeChangeFactory;
 
     log.info(String.format("Plugin '%s' at url %s", pluginName, pluginUrl));
   }
@@ -98,6 +107,44 @@ public class BatchRestApiServlet extends HttpServlet {
       return;
     } catch (AuthException | PermissionBackendException e) {
       rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
+      return;
+    }
+  }
+
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse rsp)
+      throws IOException, ServletException {
+    String requestLine, wholeRequest = "";
+    try (BufferedReader reader = req.getReader()) {
+      if (reader == null) {
+        rsp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Request body empty");
+        return;
+      }
+      while ((requestLine = reader.readLine()) != null) {
+        wholeRequest += requestLine;
+      }
+      MergeInput mergeInput = gson.fromJson(wholeRequest, MergeInput.class);
+      if (mergeInput == null) {
+        rsp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Request body invalid");
+        return;
+      }
+      MergeChange mergeChange = mergeChangeFactory.create(mergeInput);
+      try {
+        String output = OutputFormat.JSON.newGson().toJson(mergeChange.createBatch());
+        PrintWriter out = rsp.getWriter();
+        out.print(output);
+        out.flush();
+      } catch (NoSuchBatchException
+          | NoSuchProjectException
+          | IOException
+          | IllegalStateException e) {
+        rsp.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
+        return;
+      }
+    } catch (final Exception e) {
+      rsp.sendError(
+          HttpServletResponse.SC_BAD_REQUEST,
+          wholeRequest + " -= Invalid request body =- " + e.getMessage());
       return;
     }
   }
