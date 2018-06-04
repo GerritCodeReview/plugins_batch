@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "d6f8eab5_9c15b745",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/batch/Batch.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2018-06-04T23:20:31Z",
+      "side": 1,
+      "message": "Should this come in the next change (the one that lists)?",
+      "revId": "53433326a7845559ab005fced6040f93d4e26b9d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d3e464c_3306dfe0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/batch/BatchCloser.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2018-06-04T23:20:31Z",
+      "side": 1,
+      "message": "Make these all protected finals.",
+      "revId": "53433326a7845559ab005fced6040f93d4e26b9d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "67b9b5a1_fc2bcb2a",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/batch/BatchStore.java",
         "patchSetId": 2
