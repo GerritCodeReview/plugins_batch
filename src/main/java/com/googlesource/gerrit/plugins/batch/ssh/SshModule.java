@@ -21,5 +21,6 @@ public class SshModule extends PluginCommandModule {
     command(MergeChangeCommand.class);
     command(DeleteCommand.class);
     command(ListCommand.class);
+    command(SubmitCommand.class);
   }
 }

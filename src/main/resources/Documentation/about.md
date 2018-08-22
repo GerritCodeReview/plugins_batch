@@ -85,6 +85,23 @@ Username present:
 Username not present:
 `refs/batch/accounts/{account id}/`
 
+Submitting Batches
+------------------
+
+As a final step, the CI system may, on success, submit the batch (using the
+batch id that it parsed from the json) like this:
+
+```
+$ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ submit 0644a132-5b79-4c88-bf22-9364a1d02deb
+```
+
+This will then predictably apply the exact commits in the "sha1"
+entries to the respective destinations.  This allows CI systems to
+test changes as if they were already merged on the destination
+branches instead of testing them "as is", which might otherwise mean
+testing changes which are outdated with respect to the destination
+branches.
+
 
 Batch Storage
 -------------
