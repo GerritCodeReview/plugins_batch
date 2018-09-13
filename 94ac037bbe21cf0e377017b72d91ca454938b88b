@@ -46,6 +46,30 @@
       "revId": "94ac037bbe21cf0e377017b72d91ca454938b88b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc0dd1ed_ec96732d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/batch/BatchSubmitter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2018-09-13T18:33:04Z",
+      "side": 1,
+      "message": "And you\u0027ll notice it\u0027s very similar to https://gerrit.googlesource.com/gerrit/+/stable-2.15/gerrit-server/src/main/java/com/google/gerrit/server/git/receive/ReceiveCommits.java#698",
+      "parentUuid": "10d2bb32_a07d8a82",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 3
+      },
+      "revId": "94ac037bbe21cf0e377017b72d91ca454938b88b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
