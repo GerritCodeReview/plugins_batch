@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "82e62142_b2580fb4",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2018-09-13T15:43:32Z",
+      "side": 1,
+      "message": "This probably should be pushed to where this section was introduced.",
+      "range": {
+        "startLine": 28,
+        "startChar": 9,
+        "endLine": 28,
+        "endChar": 21
+      },
+      "revId": "b59dce1e0b383deec5b33122bc29e70bdfc65540",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
