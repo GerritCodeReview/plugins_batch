@@ -1,0 +1,176 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e96b00ea_5d576276",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2018-09-14T14:09:31Z",
+      "side": 1,
+      "message": "projects/refs\n\nshould be enough and also includes branches",
+      "range": {
+        "startLine": 2,
+        "startChar": 37,
+        "endLine": 2,
+        "endChar": 59
+      },
+      "revId": "ec8bff0bc6e1866c81d290832d808cc4f1704c00",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6db9db9_3e118ba7",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2018-09-14T14:09:31Z",
+      "side": 1,
+      "message": "Do you want to elaborate on how \"submitted as a unit\" is implemented?",
+      "revId": "ec8bff0bc6e1866c81d290832d808cc4f1704c00",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9a11b4c_9cedf21a",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2018-09-14T14:09:31Z",
+      "side": 1,
+      "message": "Do you want to document the format of this ref?",
+      "range": {
+        "startLine": 39,
+        "startChar": 29,
+        "endLine": 39,
+        "endChar": 109
+      },
+      "revId": "ec8bff0bc6e1866c81d290832d808cc4f1704c00",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31feb913_5b6b3ea0",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2018-09-14T14:09:31Z",
+      "side": 1,
+      "message": "If we have ref here, why is it necessary also in the download_ref?",
+      "range": {
+        "startLine": 41,
+        "startChar": 20,
+        "endLine": 41,
+        "endChar": 38
+      },
+      "revId": "ec8bff0bc6e1866c81d290832d808cc4f1704c00",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0887e6bb_c6f882a5",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2018-09-14T14:09:31Z",
+      "side": 1,
+      "message": "formats\n\nHow can a location have a location? :-)",
+      "range": {
+        "startLine": 77,
+        "startChar": 34,
+        "endLine": 77,
+        "endChar": 43
+      },
+      "revId": "ec8bff0bc6e1866c81d290832d808cc4f1704c00",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22b4c2bb_cfba37e3",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2018-09-14T14:09:31Z",
+      "side": 1,
+      "message": "under the refs/batch/users/* namespace.",
+      "range": {
+        "startLine": 78,
+        "startChar": 67,
+        "endLine": 78,
+        "endChar": 80
+      },
+      "revId": "ec8bff0bc6e1866c81d290832d808cc4f1704c00",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c0f4f8e_fdd0bd0a",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2018-09-14T14:09:31Z",
+      "side": 1,
+      "message": "under the refs/batch/accounts/* namespace.",
+      "range": {
+        "startLine": 80,
+        "startChar": 27,
+        "endLine": 80,
+        "endChar": 43
+      },
+      "revId": "ec8bff0bc6e1866c81d290832d808cc4f1704c00",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "589312d1_dcae7efa",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2018-09-14T14:09:31Z",
+      "side": 1,
+      "message": "Why not All-Batches project? This would keep All-Projects clean and if someone\nwants to uninstall the batch plugin, deleting All-Batches would be enough to\nremove its storage.",
+      "revId": "ec8bff0bc6e1866c81d290832d808cc4f1704c00",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
