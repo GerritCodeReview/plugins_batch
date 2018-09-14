@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "bf5ad8e1_9abd12e1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/batch/BatchSubmitter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2018-09-14T14:27:28Z",
+      "side": 1,
+      "message": "This is a force update as we see from the line 139.\n\nWhat if have two batches, A and B, updating two branches to different commits:\n\n* A \u003d {(\"foo\" \u003e c1), (\"bar\" \u003e c2)}\n* B \u003d {(\"foo\" \u003e c3), (\"bar\" \u003e c4)}\n\nand these two batches get submitted at the same time?\nWe could in the end have:\n* foo \u003e c1\n* bar \u003e c4\n\nwhich is neither batch update A nor batch update B.\nAt least I do not see any attempt to protect against this.\n\nIt would be nice if the documentation of this plugin discusses scenario like this\nand elaborates on decisions made by the implementors of the plugin.",
+      "revId": "94ac037bbe21cf0e377017b72d91ca454938b88b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d8bfff55_c93dfe99",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/batch/BatchSubmitter.java",
         "patchSetId": 1
