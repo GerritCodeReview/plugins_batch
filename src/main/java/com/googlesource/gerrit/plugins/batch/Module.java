@@ -14,13 +14,21 @@
 package com.googlesource.gerrit.plugins.batch;
 
 import com.google.gerrit.extensions.config.FactoryModule;
+import com.google.gerrit.extensions.events.LifecycleListener;
+import com.google.gerrit.server.git.meta.GitFile;
+import com.google.inject.internal.UniqueAnnotations;
 import com.googlesource.gerrit.plugins.batch.util.MergeBranch;
 import com.googlesource.gerrit.plugins.batch.util.MergeBuilder;
 
 public class Module extends FactoryModule {
   @Override
   protected void configure() {
+    factory(GitFile.Factory.class);
     factory(MergeBranch.Factory.class);
     factory(MergeBuilder.Factory.class);
+
+    bind(LifecycleListener.class)
+        .annotatedWith(UniqueAnnotations.create())
+        .to(BatchCleaner.Lifecycle.class);
   }
 }

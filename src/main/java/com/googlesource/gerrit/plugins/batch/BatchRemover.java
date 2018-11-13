@@ -11,6 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 package com.googlesource.gerrit.plugins.batch;
 
 import com.google.gerrit.reviewdb.client.Branch;
@@ -20,6 +21,7 @@ import com.google.gerrit.server.util.RefUpdater;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.batch.exception.NoSuchBatchException;
 import java.io.IOException;
+import org.eclipse.jgit.errors.RepositoryNotFoundException;
 
 public class BatchRemover {
   protected final RefUpdater refUpdater;
@@ -32,12 +34,14 @@ public class BatchRemover {
   }
 
   public Batch remove(String id)
-      throws IllegalStateException, IOException, NoSuchBatchException, NoSuchProjectException {
+      throws IllegalStateException, NoSuchBatchException, IOException, RepositoryNotFoundException,
+          NoSuchProjectException {
     return remove(store.read(id));
   }
 
   public Batch remove(Batch batch)
-      throws IOException, IllegalStateException, NoSuchProjectException {
+      throws IOException, IllegalStateException, RepositoryNotFoundException,
+          NoSuchProjectException {
     if (batch.state == Batch.State.OPEN) {
       throw new IllegalStateException(
           "Invalid Operation for Batch(" + batch.id + "): " + batch.state.toString());
@@ -48,7 +52,8 @@ public class BatchRemover {
     return batch;
   }
 
-  protected void removeDownloadRefs(Batch batch) throws IOException, NoSuchProjectException {
+  protected void removeDownloadRefs(Batch batch)
+      throws IOException, RepositoryNotFoundException, NoSuchProjectException {
     for (Batch.Destination dest : batch.listDestinations()) {
       Project.NameKey project = new Project.NameKey(dest.project);
       Branch.NameKey branch = new Branch.NameKey(project, dest.downloadRef);
