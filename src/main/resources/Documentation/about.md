@@ -90,3 +90,72 @@ download refs are stored for each batch, the batch data is stored as json on
 the special refs/meta/batch/<batch_id> ref in the All-Projects project. This
 is internal meta data to the batch plugin and these refs should not be
 accessed or altered by users directly.
+
+Batch Cleanup
+-------------
+Batches are temporary proposed updates. They are meant to be
+created, tested, and then submitted to their destinations if
+they pass, or deleted if they fail. Since the output of good
+batches will likely persist on destination branches, and
+the results of bad batches are not typically desirable to keep
+around, the batch service has a background *cleaner* task
+which finds expired batches and deletes them automatically.
+This cleaning helps to ensure that resources are released when
+they are no longer needed.
+
+The cleaner task runs by default daily, and batches are expired
+by default after 3 days from their last modification. It is
+possible to configure expiration times, and the cleaner using
+the `All-Projects` `refs/meta/config` `@PLUGIN@.config` file.
+The `@PLUGIN@.config` file is a "git-config" style file
+and supports the following parameters:
+
+*`cleaner.maxAge`*
+
+: Age after which a batch is considered expired. Values should
+use common unit suffixes to express their setting:
+
+    * s, sec, second, seconds (default unit)
+    * m, min, minute, minutes
+    * h, hr, hour, hours
+    * d, day, days
+    * w, week, weeks (1 week is treated as 7 days)
+    * mon, month, months (1 month is treated as 30 days)
+    * y, year, years (1 year is treated as 365 days)
+
+: If a unit suffix is not specified, seconds is assumed. If 0 is
+supplied, the maximum age is infinite and items are never
+expired (they must be deleted manually). The default maxAge is
+3 days.
+
+*`cleaner.interval`*
+
+: Interval for periodic repetition of triggering the batch
+cleanups. The interval must be larger than zero. The following
+suffixes are supported to define the time unit for the interval:
+
+    * m, min, minute, minutes (default suffix)
+    * h, hr, hour, hours
+    * d, day, days
+    * w, week, weeks (1 week is treated as 7 days)
+    * mon, month, months (1 month is treated as 30 days)
+    * y, year, years (1 year is treated as 365 days)
+
+: If a unit suffix is not specified, minutes is assumed. The
+default interval is 1 day.
+
+*`cleaner.startDelay`*
+
+: One time delay to wait after plugin load before starting
+the periodic cleaner. The following suffixes are supported
+to define the time unit for the delay:
+
+    * m, min, minute, minutes (default suffix)
+    * h, hr, hour, hours
+    * d, day, days
+    * w, week, weeks (1 week is treated as 7 days)
+    * mon, month, months (1 month is treated as 30 days)
+    * y, year, years (1 year is treated as 365 days)
+
+: If a unit suffix is not specified, minutes is assumed. The
+default startDelay is 1 minute.
