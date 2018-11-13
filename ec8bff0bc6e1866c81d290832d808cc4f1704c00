@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "502e6a00_5e143282",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2018-11-13T23:54:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e96b00ea_5d576276",
+      "range": {
+        "startLine": 2,
+        "startChar": 37,
+        "endLine": 2,
+        "endChar": 59
+      },
+      "revId": "ec8bff0bc6e1866c81d290832d808cc4f1704c00",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e6db9db9_3e118ba7",
         "filename": "src/main/resources/Documentation/about.md",
         "patchSetId": 15
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "9bd40880_d009d9c8",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2018-11-13T23:54:15Z",
+      "side": 1,
+      "message": "I have removed this from here for now since it belongs with the \"submit\" change.  I will ensure it is documented in the submit section it adds.",
+      "parentUuid": "e6db9db9_3e118ba7",
+      "revId": "ec8bff0bc6e1866c81d290832d808cc4f1704c00",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b9a11b4c_9cedf21a",
         "filename": "src/main/resources/Documentation/about.md",
         "patchSetId": 15
@@ -53,6 +95,30 @@
       "writtenOn": "2018-09-14T14:09:31Z",
       "side": 1,
       "message": "Do you want to document the format of this ref?",
+      "range": {
+        "startLine": 39,
+        "startChar": 29,
+        "endLine": 39,
+        "endChar": 109
+      },
+      "revId": "ec8bff0bc6e1866c81d290832d808cc4f1704c00",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1fc895fd_54219d4b",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2018-11-13T23:54:15Z",
+      "side": 1,
+      "message": "I improved the documentation below about it, how does it look now?",
+      "parentUuid": "b9a11b4c_9cedf21a",
       "range": {
         "startLine": 39,
         "startChar": 29,
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "ae7a9a79_9feb893f",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2018-11-13T23:54:15Z",
+      "side": 1,
+      "message": "The download ref is a real (yet temporary) ref, with merge commits and git blobs.  This is just the intended destination of the batch (likely where the changes are destined) no data is stored here.",
+      "parentUuid": "31feb913_5b6b3ea0",
+      "range": {
+        "startLine": 41,
+        "startChar": 20,
+        "endLine": 41,
+        "endChar": 38
+      },
+      "revId": "ec8bff0bc6e1866c81d290832d808cc4f1704c00",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0887e6bb_c6f882a5",
         "filename": "src/main/resources/Documentation/about.md",
         "patchSetId": 15
@@ -108,6 +198,30 @@
       "revId": "ec8bff0bc6e1866c81d290832d808cc4f1704c00",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b9c09cc_726241ce",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2018-11-13T23:54:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0887e6bb_c6f882a5",
+      "range": {
+        "startLine": 77,
+        "startChar": 34,
+        "endLine": 77,
+        "endChar": 43
+      },
+      "revId": "ec8bff0bc6e1866c81d290832d808cc4f1704c00",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -134,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "ca233929_bf42a802",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2018-11-13T23:54:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22b4c2bb_cfba37e3",
+      "range": {
+        "startLine": 78,
+        "startChar": 67,
+        "endLine": 78,
+        "endChar": 80
+      },
+      "revId": "ec8bff0bc6e1866c81d290832d808cc4f1704c00",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3c0f4f8e_fdd0bd0a",
         "filename": "src/main/resources/Documentation/about.md",
         "patchSetId": 15
@@ -157,6 +295,30 @@
     },
     {
       "key": {
+        "uuid": "f521813b_e3c5bb00",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2018-11-13T23:54:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c0f4f8e_fdd0bd0a",
+      "range": {
+        "startLine": 80,
+        "startChar": 27,
+        "endLine": 80,
+        "endChar": 43
+      },
+      "revId": "ec8bff0bc6e1866c81d290832d808cc4f1704c00",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "589312d1_dcae7efa",
         "filename": "src/main/resources/Documentation/about.md",
         "patchSetId": 15
@@ -168,6 +330,24 @@
       "writtenOn": "2018-09-14T14:09:31Z",
       "side": 1,
       "message": "Why not All-Batches project? This would keep All-Projects clean and if someone\nwants to uninstall the batch plugin, deleting All-Batches would be enough to\nremove its storage.",
+      "revId": "ec8bff0bc6e1866c81d290832d808cc4f1704c00",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e364ea3_b075922a",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2018-11-13T23:54:15Z",
+      "side": 1,
+      "message": "If you delete this storage without deleting the \"download refs\" in all the projects, you will end up littering the various projects with refs for batches.  Because of this, I would highly discourage deleting such a project, or theses \"meta\" refs which store the batches meta-data. The intended way to delete all the storage is to delete all the batches via the APIs, this will delete both these refs which contain the batch meta-data and the \"download refs\" with all the merge commits for the batches.\n\nOn my server, I would prefer to use All-Projects, I don\u0027t want another project just for my plugin.  I don\u0027t want anyone risking loading changes up for review on such a project.  I think All-Projects is a good place for meta data.  These batches (and thus refs) do get cleaned up automatically after three days, so they shouldn\u0027t be a problem.  I would certainly support any changes that provide a way to configure this if someone writes the code.",
+      "parentUuid": "589312d1_dcae7efa",
       "revId": "ec8bff0bc6e1866c81d290832d808cc4f1704c00",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
