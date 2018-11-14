@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "09270061_5a5d1775",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/batch/BatchSubmitter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2018-11-14T00:48:23Z",
+      "side": 1,
+      "message": "Good point.  I added a bunch of stuff now, see here https://gerrit-review.googlesource.com/c/plugins/batch/+/195690/1..2/src/main/resources/Documentation/about.md",
+      "parentUuid": "bf5ad8e1_9abd12e1",
+      "revId": "94ac037bbe21cf0e377017b72d91ca454938b88b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d8bfff55_c93dfe99",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/batch/BatchSubmitter.java",
         "patchSetId": 1
