@@ -7,8 +7,10 @@ batch updates tend to be verification (by CI systems). Batch
 updates are not reviewable in the Gerrit UI, but they are
 downloadable as git refs. The @PLUGIN@ update service provides the
 tools to build these refs by merging changes to temporary "snapshot"
-refs, which can then be tested. The intent is to make the same exact
-(same git SHA1s) updates testable across potentially many machines.
+refs, which can then be tested and finally "submitted" as a "unit"
+if desired. The intent is to make the same exact (same git SHA1s)
+updates testable across potentially many machines, and to apply
+those exact SHA1s to the final destination refs on batch submittal.
 
 Creating Batches
 ----------------
@@ -82,6 +84,43 @@ The format above may be counted on and should be used to set read access
 permissons on. The format of the download_ref after the "..."s is internal
 and should not be counted on to be stable, use the download_ref field to
 access the batch data instead of guessing at the format of this ref.
+
+Submitting Batches
+------------------
+As a final step, the CI system may, on success, submit the batch (using the
+batch id that it parsed from the json) like this:
+
+```
+$ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ submit --force \
+  0644a132-5b79-4c88-bf22-9364a1d02deb
+```
+
+This will then predictably apply the exact commits in the "sha1"
+entries to the respective destinations using a force push approach. This
+allows CI systems to test changes as if they were already merged on the
+destination branches instead of testing them "as is", which might
+otherwise mean testing changes which are outdated with respect to the
+destination branches.
+
+Because neither git nor Gerrit supports updating refs atomically across
+repositories, the forced push approach has been found to be the most
+reliable approach for CI systems to use to ensure that what they tested
+gets applied to their branches. Using a forced push strategy requires
+that the account submitting batches have FORCE PUSH permissons. To
+make this work reliably and to ensure that no history is ever lost, it
+is important that batches are only ever built from the current tips, and
+that those batches get submitted before any of the tips change. If other
+batches or changes are submitted to the batch's destination branches
+after the batch was created but before it is submitted using force push,
+then some history will likely be lost. The risk of this occurring is a
+generally seen as a worthwhile tradeoff to ensure that only what has been
+tested ever gets merged into a branch's history. It is advisable to only
+ever update branches that will have batches submitted to them by an actor
+that can create and submit batches "serially" and be the only actor
+updating these branches. This can be achieved by removing SUBMIT
+permissions from all accounts and giving a single account, used by a
+single process, FORCE PUSH permission to create and submit batches
+following the guidelines above.
 
 Batch Storage
 -------------
