@@ -258,4 +258,15 @@ result "$GROUP reverse" "$bjson"
 ! bjson=$(batchssh merge-change --close "$ch2",1)
 result "$GROUP missing" "$bjson"
 
+
+setupGroup "submit" "Batch Submit" # -------------
+
+bjson=$(batchssh submit --force "$id")
+result "$GROUP submit" "$bjson"
+
+result_out "$GROUP submit dest_commit" "$sha1" "$(remote_show "$DEST_REF")"
+result_out "$GROUP submit state" "DELETED" "$(b_state)"
+result_out "$GROUP submit change_state" "MERGED" \
+    "$(query_by "$(query "$ch1")" "status")"
+
 exit $RESULT

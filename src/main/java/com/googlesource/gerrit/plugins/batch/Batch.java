@@ -38,6 +38,10 @@ public class Batch {
       number = psId.getParentKey().get();
       patchSet = psId.get();
     }
+
+    public PatchSet.Id toPatchSetId() {
+      return new PatchSet.Id(new com.google.gerrit.reviewdb.client.Change.Id(number), patchSet);
+    }
   }
 
   public class Destination {
