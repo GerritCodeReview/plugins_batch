@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b349a387_71ab9f25",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2018-11-14T22:52:35Z",
+      "side": 1,
+      "message": "s/fored/forced/",
+      "range": {
+        "startLine": 108,
+        "startChar": 40,
+        "endLine": 108,
+        "endChar": 45
+      },
+      "revId": "9e183ddbcd7371de23ecb5011d69bddea85fc10e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f678f145_b28e479d",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2018-11-14T22:52:35Z",
+      "side": 1,
+      "message": "did you mean destination branches?",
+      "range": {
+        "startLine": 113,
+        "startChar": 40,
+        "endLine": 113,
+        "endChar": 54
+      },
+      "revId": "9e183ddbcd7371de23ecb5011d69bddea85fc10e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
