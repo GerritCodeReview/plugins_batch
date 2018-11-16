@@ -13,6 +13,6 @@ gerrit_plugin(
     ],
     resources = glob(["src/main/resources/**/*"]),
     deps = [
-        "//gerrit-util-cli:cli"
+        "//gerrit-util-cli:cli",
     ],
 )
