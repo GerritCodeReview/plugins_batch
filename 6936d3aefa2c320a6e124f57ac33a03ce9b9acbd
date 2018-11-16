@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "85fb10b1_994bba7a",
+        "filename": "BUILD",
+        "patchSetId": 17
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-11-16T19:16:48Z",
+      "side": 1,
+      "message": "Where is this defined?  The build is failing with:\n\n no such package \u0027gerrit-util-cli\u0027",
+      "range": {
+        "startLine": 16,
+        "startChar": 8,
+        "endLine": 16,
+        "endChar": 31
+      },
+      "revId": "6936d3aefa2c320a6e124f57ac33a03ce9b9acbd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
