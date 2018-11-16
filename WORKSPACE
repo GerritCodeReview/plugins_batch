@@ -3,8 +3,8 @@ workspace(name = "batch")
 load("//:bazlets.bzl", "load_bazlets")
 
 load_bazlets(
-    commit = "1affa0acc6e730f8959c28a2098b562d11a90f91",
-    #    local_path = "/home/<user>/projects/bazlets",
+    commit = "f1d3eefb78029298afe119b0d8b2a43de2b510f6",
+    #local_path = "/home/<user>/projects/bazlets",
 )
 
 # Release Plugin API

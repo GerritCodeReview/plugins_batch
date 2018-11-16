@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.batch.ssh;
 
+import com.google.gerrit.server.AccessPath;
 import com.google.gerrit.sshd.BaseCommand;
 import com.google.gerrit.sshd.CommandMetaData;
 import com.google.inject.Inject;
@@ -38,6 +39,6 @@ public class ListCommand extends BaseCommand {
             parseCommandLine(impl);
             impl.display(out);
           }
-        });
+        }, AccessPath.SSH_COMMAND);
   }
 }
