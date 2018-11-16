@@ -18,8 +18,6 @@ import com.google.gerrit.reviewdb.client.Branch;
 import com.google.gerrit.reviewdb.client.File;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.git.GitRepositoryManager;
-import com.google.gerrit.server.git.MetaDataUpdate;
-import com.google.gerrit.server.git.VersionedMetaData;
 import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
@@ -58,7 +56,7 @@ public class GitFile extends VersionedMetaData {
   public String read() throws ConfigInvalidException, IOException, NoSuchProjectException {
     Project.NameKey project = branch.getParentKey();
     try (Repository repo = repos.openRepository(project)) {
-      load(repo);
+      load(project, repo);
       return text;
     } catch (RepositoryNotFoundException e) {
       throw new NoSuchProjectException(project);
