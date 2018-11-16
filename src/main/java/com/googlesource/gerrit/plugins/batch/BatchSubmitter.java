@@ -14,7 +14,6 @@
 
 package com.googlesource.gerrit.plugins.batch;
 
-import com.google.gerrit.common.TimeUtil;
 import com.google.gerrit.extensions.restapi.AuthException;
 import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.gerrit.reviewdb.client.Branch;
@@ -35,8 +34,8 @@ import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.gerrit.server.update.BatchUpdate;
 import com.google.gerrit.server.update.UpdateException;
 import com.google.gerrit.server.util.RefUpdater;
-import com.google.gerrit.server.util.RequestId;
 import com.google.gerrit.server.util.RequestScopePropagator;
+import com.google.gerrit.server.util.time.TimeUtil;
 import com.google.gwtorm.server.OrmException;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.batch.exception.NoSuchBatchException;
@@ -172,7 +171,6 @@ public class BatchSubmitter {
         ObjectReader reader = ins.newReader();
         RevWalk walk = new RevWalk(reader)) {
       bu.setRepository(repo, walk, ins).updateChangesInParallel();
-      bu.setRequestId(RequestId.forChange(change));
       bu.setRefLogMessage("merged (batch submit)");
 
       bu.addOp(
