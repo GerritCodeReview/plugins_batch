@@ -12,7 +12,4 @@ gerrit_plugin(
         "Gerrit-SshModule: com.googlesource.gerrit.plugins.batch.ssh.SshModule",
     ],
     resources = glob(["src/main/resources/**/*"]),
-    deps = [
-        "//gerrit-util-cli:cli",
-    ],
 )
