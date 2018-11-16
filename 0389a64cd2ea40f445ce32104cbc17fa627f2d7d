@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4c3c4b65_9ff5ce78",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-11-16T19:34:14Z",
+      "side": 1,
+      "message": "This should read \"has deprecated\"; I just copied this commit message from another project where this was fixed before the deprecation.",
+      "range": {
+        "startLine": 10,
+        "startChar": 43,
+        "endLine": 10,
+        "endChar": 58
+      },
+      "revId": "0389a64cd2ea40f445ce32104cbc17fa627f2d7d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
