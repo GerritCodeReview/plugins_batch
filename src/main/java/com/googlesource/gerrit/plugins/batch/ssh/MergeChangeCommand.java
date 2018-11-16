@@ -137,11 +137,7 @@ public class MergeChangeCommand extends SshCommand {
     }
     for (ObjectId parent : parents) {
       Project.NameKey project = psarg.change.getDest().getParentKey();
-      Boolean isMergedInto = isMergedInto(project, parent, sha1);
-      if (isMergedInto == null) {
-        throw new IOException();
-      }
-      if (isMergedInto) {
+      if (isMergedInto(project, parent, sha1)) {
         return true;
       }
     }
