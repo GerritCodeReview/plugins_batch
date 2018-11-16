@@ -202,8 +202,8 @@ public class RefUpdater {
             project, update.getName(), update.getOldObjectId(), args.newObjectId);
       }
       if (userProvider.get().isIdentifiedUser()) {
-        AccountState accountState = accountCache.get(userProvider.get().getAccountId());
-        gitRefUpdated.fire(project, update, accountState.getAccount());
+        AccountState accountState = accountCache.get(userProvider.get().getAccountId()).get();
+        gitRefUpdated.fire(project, update, accountState);
       }
     }
   }

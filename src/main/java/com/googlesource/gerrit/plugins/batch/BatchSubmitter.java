@@ -14,7 +14,6 @@
 
 package com.googlesource.gerrit.plugins.batch;
 
-import com.google.gerrit.common.TimeUtil;
 import com.google.gerrit.extensions.restapi.AuthException;
 import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.gerrit.reviewdb.client.Branch;
@@ -26,6 +25,8 @@ import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.PatchSetUtil;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.MergedByPushOp;
+import com.google.gerrit.server.logging.RequestId;
+import com.google.gerrit.server.logging.TraceContext;
 import com.google.gerrit.server.notedb.ChangeNotes;
 import com.google.gerrit.server.permissions.ChangePermission;
 import com.google.gerrit.server.permissions.PermissionBackend;
@@ -35,8 +36,8 @@ import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.gerrit.server.update.BatchUpdate;
 import com.google.gerrit.server.update.UpdateException;
 import com.google.gerrit.server.util.RefUpdater;
-import com.google.gerrit.server.util.RequestId;
 import com.google.gerrit.server.util.RequestScopePropagator;
+import com.google.gerrit.server.util.time.TimeUtil;
 import com.google.gwtorm.server.OrmException;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.batch.exception.NoSuchBatchException;
@@ -166,15 +167,16 @@ public class BatchSubmitter {
     Branch.NameKey destination = change.getDest();
     Project.NameKey project = destination.getParentKey();
 
-    try (Repository repo = repoManager.openRepository(project);
+    try (TraceContext traceContext =
+            TraceContext.open()
+                .addTag(RequestId.Type.SUBMISSION_ID, new RequestId(change.getId().toString()));
+        Repository repo = repoManager.openRepository(project);
         BatchUpdate bu = batchUpdateFactory.create(db, project, user, TimeUtil.nowTs());
         ObjectInserter ins = repo.newObjectInserter();
         ObjectReader reader = ins.newReader();
         RevWalk walk = new RevWalk(reader)) {
       bu.setRepository(repo, walk, ins).updateChangesInParallel();
-      bu.setRequestId(RequestId.forChange(change));
       bu.setRefLogMessage("merged (batch submit)");
-
       bu.addOp(
           psId.getParentKey(),
           mergedByPushOpFactory.create(requestScopePropagator, psId, destination.get()));

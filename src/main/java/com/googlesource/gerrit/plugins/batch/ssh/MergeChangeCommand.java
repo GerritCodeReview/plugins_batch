@@ -18,7 +18,6 @@ import com.google.gerrit.reviewdb.client.Change;
 import com.google.gerrit.reviewdb.client.PatchSet;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.server.ReviewDb;
-import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.OutputFormat;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.project.NoSuchRefException;
@@ -86,7 +85,6 @@ public class MergeChangeCommand extends SshCommand {
   @Inject protected MergeBranch.Factory mergeBranchFactory;
   @Inject protected BatchCloser batchCloser;
   @Inject protected ReviewDb db;
-  @Inject protected IdentifiedUser user;
   @Inject protected GitRepositoryManager repoManager;
   protected Map<PatchSet.Id, List<ObjectId>> parentsByPsarg = new HashMap<>();
 

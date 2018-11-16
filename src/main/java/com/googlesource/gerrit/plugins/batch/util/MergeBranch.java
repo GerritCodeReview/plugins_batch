@@ -14,16 +14,16 @@
 package com.googlesource.gerrit.plugins.batch.util;
 
 import com.google.gerrit.common.Nullable;
-import com.google.gerrit.extensions.client.InheritableBoolean;
 import com.google.gerrit.extensions.restapi.BadRequestException;
+import com.google.gerrit.reviewdb.client.BooleanProjectConfig;
 import com.google.gerrit.reviewdb.client.Branch;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.client.RefNames;
 import com.google.gerrit.server.git.GitRepositoryManager;
-import com.google.gerrit.server.git.IntegrationException;
 import com.google.gerrit.server.project.NoSuchRefException;
 import com.google.gerrit.server.project.ProjectCache;
 import com.google.gerrit.server.project.ProjectState;
+import com.google.gerrit.server.submit.IntegrationException;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.googlesource.gerrit.plugins.batch.util.MergeBuilder.FastForwardMode;
@@ -112,8 +112,8 @@ public class MergeBranch implements Callable<ObjectId> {
 
   protected MergeStrategy defaultStrategy(MergeStrategy strategy) {
     if (strategy == null) {
-      Project project = projectFromName(projectName);
-      if (project != null && project.getUseContentMerge() == InheritableBoolean.TRUE) {
+      ProjectState project = projectFromName(projectName);
+      if (project != null && project.is(BooleanProjectConfig.USE_CONTENT_MERGE)) {
         return MergeStrategy.RESOLVE;
       }
       return MergeStrategy.SIMPLE_TWO_WAY_IN_CORE;
@@ -121,11 +121,8 @@ public class MergeBranch implements Callable<ObjectId> {
     return strategy;
   }
 
-  protected Project projectFromName(Project.NameKey name) {
+  protected ProjectState projectFromName(Project.NameKey name) {
     ProjectState ps = projectCache.get(name);
-    if (ps == null) {
-      return null;
-    }
-    return ps.getProject();
+    return ps != null ? ps : null;
   }
 }

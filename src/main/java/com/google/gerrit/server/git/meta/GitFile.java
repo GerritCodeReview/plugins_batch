@@ -17,8 +17,6 @@ package com.google.gerrit.server.git.meta;
 import com.google.gerrit.reviewdb.client.Branch;
 import com.google.gerrit.reviewdb.client.File;
 import com.google.gerrit.server.git.GitRepositoryManager;
-import com.google.gerrit.server.git.MetaDataUpdate;
-import com.google.gerrit.server.git.VersionedMetaData;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import java.io.IOException;
@@ -54,7 +52,7 @@ public class GitFile extends VersionedMetaData {
 
   public String read() throws ConfigInvalidException, IOException {
     try (Repository repo = repos.openRepository(branch.getParentKey())) {
-      load(repo);
+      load(branch.getParentKey(), repo);
       return text;
     }
   }
