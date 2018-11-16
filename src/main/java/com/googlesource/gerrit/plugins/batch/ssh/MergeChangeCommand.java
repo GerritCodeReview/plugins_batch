@@ -191,6 +191,8 @@ public class MergeChangeCommand extends SshCommand {
    */
   protected class Resolver {
     protected class ParentsNotOnBranchException extends Exception {
+      private static final long serialVersionUID = 1L;
+
       protected ParentsNotOnBranchException(PatchSetArgument psarg) {
         super(
             "No Parent of "

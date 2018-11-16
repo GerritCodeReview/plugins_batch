@@ -15,6 +15,8 @@
 package com.googlesource.gerrit.plugins.batch.exception;
 
 public class NoSuchBatchException extends Exception {
+  private static final long serialVersionUID = 1L;
+
   public NoSuchBatchException(String id) {
     super("No such batch: " + id);
   }
