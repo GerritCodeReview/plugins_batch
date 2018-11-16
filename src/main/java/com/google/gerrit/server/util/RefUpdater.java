@@ -27,6 +27,7 @@ import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.io.IOException;
+import java.util.Optional;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.PersonIdent;
@@ -193,8 +194,10 @@ public class RefUpdater {
             project, update.getName(), update.getOldObjectId(), args.newObjectId);
       }
       if (userProvider.get().isIdentifiedUser()) {
-        AccountState accountState = accountCache.get(userProvider.get().getAccountId());
-        gitRefUpdated.fire(project, update, accountState.getAccount());
+        Optional<AccountState> accountState = accountCache.get(userProvider.get().getAccountId());
+        if (accountState.isPresent()) {
+          gitRefUpdated.fire(project, update, accountState.get());
+        }
       }
     }
   }
