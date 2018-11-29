@@ -46,6 +46,30 @@
       "revId": "d78e4137b5122874fefdb3558d8d645b16dba4d1",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b2580a8_87dacace",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/batch/BatchSubmitter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-11-29T07:26:03Z",
+      "side": 0,
+      "message": "RequestId.forChange doesn\u0027t exist any more.  I\u0027ll assume it\u0027s OK to directly instantiate one like:\n\n  new RequestId(change.getId().toString())",
+      "parentUuid": "cf97c9eb_3f45b997",
+      "range": {
+        "startLine": 175,
+        "startChar": 6,
+        "endLine": 175,
+        "endChar": 51
+      },
+      "revId": "d78e4137b5122874fefdb3558d8d645b16dba4d1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
