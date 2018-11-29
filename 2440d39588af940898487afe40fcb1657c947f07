@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b541c001_7d9f0884",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2018-11-29T17:11:12Z",
+      "side": 1,
+      "message": "What is the reasoning behind updating the API?  Did it not build without updating it?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 1
+      },
+      "revId": "2440d39588af940898487afe40fcb1657c947f07",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "391ea087_7c4c3343",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2018-11-29T17:11:12Z",
+      "side": 1,
+      "message": "Why, did it not work with a lower version?  We generally want to keep our dependencies as low as possible, it increases the target audiences.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 1
+      },
+      "revId": "2440d39588af940898487afe40fcb1657c947f07",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
