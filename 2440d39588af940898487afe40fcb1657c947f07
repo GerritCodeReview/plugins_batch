@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2017adbd_63955308",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-11-29T23:34:28Z",
+      "side": 1,
+      "message": "It didn\u0027t build due to the API change in WorkQueue.  See the change that was done here:\n\nhttps://gerrit-review.googlesource.com/c/plugins/batch/+/204960/1/src/main/java/com/googlesource/gerrit/plugins/batch/ssh/ListCommand.java",
+      "parentUuid": "b541c001_7d9f0884",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 1
+      },
+      "revId": "2440d39588af940898487afe40fcb1657c947f07",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "391ea087_7c4c3343",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2018-11-29T17:11:12Z",
       "side": 1,
       "message": "Why, did it not work with a lower version?  We generally want to keep our dependencies as low as possible, it increases the target audiences.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 1
+      },
+      "revId": "2440d39588af940898487afe40fcb1657c947f07",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "104684ed_111fa1a7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-11-29T23:34:28Z",
+      "side": 1,
+      "message": "It worked, but I thought it\u0027s generally better to use the latest version to get bugfixes.\n\nIf you prefer, we can revert this, although actually I had also suggested just removing the Maven build.",
+      "parentUuid": "391ea087_7c4c3343",
       "range": {
         "startLine": 11,
         "startChar": 0,
