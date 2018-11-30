@@ -13,5 +13,4 @@
 function rev() {
   git describe --always --match "v[0-9].*" --dirty
 }
-# TODO
 echo STABLE_BUILD_BATCH_LABEL $(rev)
