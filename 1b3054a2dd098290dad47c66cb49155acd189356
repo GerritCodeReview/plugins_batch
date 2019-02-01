@@ -45,6 +45,53 @@
       "revId": "1b3054a2dd098290dad47c66cb49155acd189356",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4a1c41a_32c62b2f",
+        "filename": "pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2019-02-01T19:21:44Z",
+      "side": 1,
+      "message": "I suspect the previous \"minor\" revision was because it did not work with the prior stable releases. I would generally constrain things as little as possible, so if this works with 2.16 then we should leave it at that.",
+      "parentUuid": "44fc00da_5dd00753",
+      "range": {
+        "startLine": 25,
+        "startChar": 11,
+        "endLine": 25,
+        "endChar": 15
+      },
+      "revId": "1b3054a2dd098290dad47c66cb49155acd189356",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7451fd32_b7518786",
+        "filename": "src/main/java/com/google/gerrit/server/util/RefUpdater.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2019-02-01T19:21:44Z",
+      "side": 1,
+      "message": "When is this false? I don\u0027t think skipping the event firing is the right thing to do?",
+      "range": {
+        "startLine": 198,
+        "startChar": 25,
+        "endLine": 198,
+        "endChar": 34
+      },
+      "revId": "1b3054a2dd098290dad47c66cb49155acd189356",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
