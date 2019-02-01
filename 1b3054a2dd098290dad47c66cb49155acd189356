@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f9dcf0a1_ac96e39f",
+        "filename": "WORKSPACE",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2019-02-01T15:26:02Z",
+      "side": 1,
+      "message": "Fine if willing to stick to 2.16 straight for the bazel build, beside that other decision to make about the maven one (potentially going from 2.15.7 to 2.16.4 per se). Before this change, this plugin was already sticking to a major version (2.15 straight) for its bazel build.",
+      "range": {
+        "startLine": 6,
+        "startChar": 14,
+        "endLine": 6,
+        "endChar": 54
+      },
+      "revId": "1b3054a2dd098290dad47c66cb49155acd189356",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44fc00da_5dd00753",
+        "filename": "pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2019-02-01T15:26:02Z",
+      "side": 1,
+      "message": "2.16.4, rather? -Since the version used before this change was 2.15.7, a specifically minor one.",
+      "range": {
+        "startLine": 25,
+        "startChar": 11,
+        "endLine": 25,
+        "endChar": 15
+      },
+      "revId": "1b3054a2dd098290dad47c66cb49155acd189356",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
