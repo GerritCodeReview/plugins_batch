@@ -140,6 +140,30 @@
       "revId": "1b3054a2dd098290dad47c66cb49155acd189356",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62186874_7c58b17a",
+        "filename": "src/main/java/com/google/gerrit/server/util/RefUpdater.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2019-02-04T16:02:53Z",
+      "side": 1,
+      "message": "I\u0027m a little confused. It seem like what you are saying is \u0027we are avoiding a crash when the account is null\", but we probably still aren\u0027t doing the right thing then? When would the account not be in the cache? What is the proper recovery for this account not being in the cache? This feels a bit like the checked versus unchecked exception case, why are we bothering to complicate the missing account logic if we don\u0027t have a good recovery path?",
+      "parentUuid": "3d165f3c_1cc778f6",
+      "range": {
+        "startLine": 198,
+        "startChar": 25,
+        "endLine": 198,
+        "endChar": 34
+      },
+      "revId": "1b3054a2dd098290dad47c66cb49155acd189356",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
