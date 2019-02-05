@@ -39,6 +39,7 @@ public class ListCommand extends BaseCommand {
             parseCommandLine(impl);
             impl.display(out);
           }
-        }, AccessPath.SSH_COMMAND);
+        },
+        AccessPath.SSH_COMMAND);
   }
 }

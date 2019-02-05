@@ -69,7 +69,7 @@ public class MergeChangeCommand extends SshCommand {
   public boolean close;
 
   protected LinkedHashMap<PatchSet.Id, PatchSetArgument> patchSetArgumentsByPatchSet =
-      new LinkedHashMap<PatchSet.Id, PatchSetArgument>();
+      new LinkedHashMap<>();
 
   @Argument(
       index = 0,
@@ -89,8 +89,7 @@ public class MergeChangeCommand extends SshCommand {
   @Inject protected ReviewDb db;
   @Inject protected IdentifiedUser user;
   @Inject protected GitRepositoryManager repoManager;
-  protected Map<PatchSet.Id, List<ObjectId>> parentsByPsarg =
-      new HashMap<PatchSet.Id, List<ObjectId>>();
+  protected Map<PatchSet.Id, List<ObjectId>> parentsByPsarg = new HashMap<>();
 
   @Override
   public void run() throws Exception {
@@ -200,17 +199,16 @@ public class MergeChangeCommand extends SshCommand {
     }
 
     protected class Destination {
-      List<PatchSetArgument> remaining = new ArrayList<PatchSetArgument>();
-      Set<ObjectId> sources = new HashSet<ObjectId>();
+      List<PatchSetArgument> remaining = new ArrayList<>();
+      Set<ObjectId> sources = new HashSet<>();
 
       Destination(Branch.NameKey branch) throws IOException, NoSuchRefException {
         sources.add(getTip(branch));
       }
     }
 
-    protected Map<Branch.NameKey, Destination> destinationsByBranches =
-        new HashMap<Branch.NameKey, Destination>();
-    protected List<PatchSetArgument> resolved = new ArrayList<PatchSetArgument>();
+    protected Map<Branch.NameKey, Destination> destinationsByBranches = new HashMap<>();
+    protected List<PatchSetArgument> resolved = new ArrayList<>();
 
     protected Resolver(Iterable<PatchSetArgument> psargs)
         throws Exception, IOException, OrmException, NoSuchRefException,
@@ -288,7 +286,7 @@ public class MergeChangeCommand extends SshCommand {
   protected List<ObjectId> loadParents(PatchSetArgument psarg) throws IOException {
     try (Repository repo = repoManager.openRepository(psarg.change.getProject());
         RevWalk revWalk = new RevWalk(repo)) {
-      List<ObjectId> parents = new ArrayList<ObjectId>();
+      List<ObjectId> parents = new ArrayList<>();
       ObjectId id = ObjectId.fromString(psarg.patchSet.getRevision().get());
       RevCommit c = revWalk.parseCommit(id);
       for (RevCommit parent : c.getParents()) {

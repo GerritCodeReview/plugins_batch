@@ -38,8 +38,7 @@ public class FastForwardOptions {
 
   public FastForwardMode getFastForwardMode() throws UnloggedFailure {
     if (selected == null) {
-      EnumMap<FastForwardMode, Boolean> valuesByMode =
-          new EnumMap<FastForwardMode, Boolean>(FastForwardMode.class);
+      EnumMap<FastForwardMode, Boolean> valuesByMode = new EnumMap<>(FastForwardMode.class);
       valuesByMode.put(FastForwardMode.FF, ff);
       valuesByMode.put(FastForwardMode.NO_FF, noff);
       valuesByMode.put(FastForwardMode.FF_ONLY, ffOnly);
@@ -62,7 +61,7 @@ public class FastForwardOptions {
   }
 
   protected static Set<String> toStrings(EnumSet<FastForwardMode> modes) {
-    Set<String> out = new HashSet<String>();
+    Set<String> out = new HashSet<>();
     for (FastForwardMode mode : modes) {
       out.add(mode.getName());
     }

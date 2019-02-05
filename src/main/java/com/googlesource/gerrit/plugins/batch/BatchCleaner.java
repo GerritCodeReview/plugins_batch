@@ -111,7 +111,7 @@ public class BatchCleaner implements CancelableRunnable {
     this.list = list;
 
     this.userProvider = userProvider;
-    list.query = new ArrayList<String>();
+    list.query = new ArrayList<>();
     list.query.add("is:expired");
   }
 

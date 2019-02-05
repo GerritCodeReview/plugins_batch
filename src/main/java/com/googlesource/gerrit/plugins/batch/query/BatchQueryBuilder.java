@@ -51,7 +51,7 @@ public class BatchQueryBuilder extends QueryBuilder<Batch> {
   }
 
   protected static final QueryBuilder.Definition<Batch, BatchQueryBuilder> mydef =
-      new QueryBuilder.Definition<Batch, BatchQueryBuilder>(BatchQueryBuilder.class);
+      new QueryBuilder.Definition<>(BatchQueryBuilder.class);
 
   public static final long DEFAULT_SECONDS = TimeUnit.SECONDS.convert(3, TimeUnit.DAYS);
 
