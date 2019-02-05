@@ -164,6 +164,30 @@
       "revId": "1b3054a2dd098290dad47c66cb49155acd189356",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "928c6c1e_5da7c722",
+        "filename": "src/main/java/com/google/gerrit/server/util/RefUpdater.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-02-05T04:25:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62186874_7c58b17a",
+      "range": {
+        "startLine": 198,
+        "startChar": 25,
+        "endLine": 198,
+        "endChar": 34
+      },
+      "revId": "1b3054a2dd098290dad47c66cb49155acd189356",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
