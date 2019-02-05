@@ -22,7 +22,6 @@ import com.google.gerrit.index.query.QueryBuilder;
 import com.google.gerrit.index.query.QueryParseException;
 import com.google.gerrit.server.config.ConfigUtil;
 import com.google.gerrit.server.config.PluginConfigFactory;
-import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.gerrit.server.project.ProjectCache;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.batch.Batch;
@@ -73,7 +72,7 @@ public class BatchQueryBuilder extends QueryBuilder<Batch> {
     this.pluginName = pluginName;
   }
 
-  public Date getExpiry() throws NoSuchProjectException {
+  public Date getExpiry() {
     Config config = cfgFactory.getProjectPluginConfig(projectCache.getAllProjects(), pluginName);
     long seconds =
         ConfigUtil.getTimeUnit(
@@ -83,7 +82,7 @@ public class BatchQueryBuilder extends QueryBuilder<Batch> {
   }
 
   @Operator
-  public Predicate<Batch> is(String value) throws NoSuchProjectException, QueryParseException {
+  public Predicate<Batch> is(String value) throws QueryParseException {
     if ("expired".equalsIgnoreCase(value)) {
       return new SimplePredicate("is", value) {
         Date expiry = getExpiry();
