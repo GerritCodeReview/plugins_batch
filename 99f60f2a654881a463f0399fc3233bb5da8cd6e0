@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b3940e62_4d2e6f45",
+        "filename": "src/main/java/com/google/gerrit/server/git/meta/GitFile.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2019-02-05T20:17:21Z",
+      "side": 0,
+      "message": "We actually want this to be thrown so that our caller can handle this see https://gerrit-review.googlesource.com/c/plugins/batch/+/212855/1/src/main/java/com/googlesource/gerrit/plugins/batch/BatchStore.java#b104. Unfortunately, what we throw is RepositoryNotFoundException instead. In some other places I manage to catch that and convert it to NoSuchProjectException, that probably should be done here instead of eliminating this.",
+      "range": {
+        "startLine": 56,
+        "startChar": 67,
+        "endLine": 56,
+        "endChar": 80
+      },
+      "revId": "99f60f2a654881a463f0399fc3233bb5da8cd6e0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21ddfbe9_d78f4c47",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/batch/BatchStore.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2019-02-05T20:17:21Z",
+      "side": 0,
+      "message": "We want to catch this and fall through.",
+      "range": {
+        "startLine": 104,
+        "startChar": 13,
+        "endLine": 104,
+        "endChar": 37
+      },
+      "revId": "99f60f2a654881a463f0399fc3233bb5da8cd6e0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
