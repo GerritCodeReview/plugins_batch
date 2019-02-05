@@ -115,9 +115,8 @@ public class MergeBranch implements Callable<ObjectId> {
       Project project = projectFromName(projectName);
       if (project != null && project.getUseContentMerge() == InheritableBoolean.TRUE) {
         return MergeStrategy.RESOLVE;
-      } else {
-        return MergeStrategy.SIMPLE_TWO_WAY_IN_CORE;
       }
+      return MergeStrategy.SIMPLE_TWO_WAY_IN_CORE;
     }
     return strategy;
   }

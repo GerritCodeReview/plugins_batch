@@ -128,7 +128,7 @@ public class RefUpdater {
     protected Project.NameKey project;
     protected boolean delete;
 
-    protected Update(Args args) throws IOException {
+    protected Update(Args args) {
       this.args = args;
       branch = args.branch;
       project = branch.getParentKey();
@@ -177,11 +177,20 @@ public class RefUpdater {
           if (!delete && !args.isForceUpdate) {
             throw new IOException(result.name());
           }
+          // $FALL-THROUGH$
         case FAST_FORWARD:
         case NEW:
         case NO_CHANGE:
           onUpdated(update, args);
           break;
+        case IO_FAILURE:
+        case LOCK_FAILURE:
+        case NOT_ATTEMPTED:
+        case REJECTED:
+        case REJECTED_CURRENT_BRANCH:
+        case REJECTED_MISSING_OBJECT:
+        case REJECTED_OTHER_REASON:
+        case RENAMED:
         default:
           throw new IOException(result.name());
       }

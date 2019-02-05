@@ -24,7 +24,6 @@ import com.google.gerrit.server.config.ConfigUtil;
 import com.google.gerrit.server.config.PluginConfigFactory;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.gerrit.server.git.WorkQueue.CancelableRunnable;
-import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.gerrit.server.project.ProjectCache;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -57,8 +56,7 @@ public class BatchCleaner implements CancelableRunnable {
         WorkQueue workQueue,
         BatchCleaner cleaner,
         ProjectCache projectCache,
-        @PluginName String pluginName)
-        throws NoSuchProjectException {
+        @PluginName String pluginName) {
       this.cfgFactory = cfgFactory;
       this.workQueue = workQueue;
       this.cleaner = cleaner;
@@ -81,13 +79,13 @@ public class BatchCleaner implements CancelableRunnable {
       cleaner.cancel();
     }
 
-    protected long startDelay() throws NoSuchProjectException {
+    protected long startDelay() {
       Config config = cfgFactory.getProjectPluginConfig(projectCache.getAllProjects(), pluginName);
       return ConfigUtil.getTimeUnit(
           config, "cleaner", null, "startDelay", DEFAULT_START_MINUTES, MINUTES);
     }
 
-    protected long interval() throws NoSuchProjectException {
+    protected long interval() {
       Config config = cfgFactory.getProjectPluginConfig(projectCache.getAllProjects(), pluginName);
       String freq = config.getString("cleaner", null, "interval");
       if (freq != null && ("disabled".equalsIgnoreCase(freq) || "off".equalsIgnoreCase(freq))) {
@@ -111,7 +109,7 @@ public class BatchCleaner implements CancelableRunnable {
     this.list = list;
 
     this.userProvider = userProvider;
-    list.query = new ArrayList<String>();
+    list.query = new ArrayList<>();
     list.query.add("is:expired");
   }
 
