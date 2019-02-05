@@ -177,6 +177,7 @@ public class RefUpdater {
           if (!delete && !args.isForceUpdate) {
             throw new IOException(result.name());
           }
+          // $FALL-THROUGH$
         case FAST_FORWARD:
         case NEW:
         case NO_CHANGE:
