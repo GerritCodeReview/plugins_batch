@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import javax.inject.Singleton;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.lib.Ref;
@@ -62,10 +61,9 @@ public class BatchStore {
   public List<Batch> find(boolean includeBatchInfo) throws IOException {
     List<Batch> batches = new ArrayList<>();
     try (Repository repo = repoManager.openRepository(project)) {
-      for (Map.Entry<String, Ref> entry : repo.getRefDatabase().getRefs(BATCHES_REF).entrySet()) {
+      for (Ref ref : repo.getRefDatabase().getRefsByPrefix(BATCHES_REF)) {
         try {
-          batches.add(
-              (includeBatchInfo == true) ? read(entry.getKey()) : new Batch(entry.getKey()));
+          batches.add((includeBatchInfo == true) ? read(ref.getName()) : new Batch(ref.getName()));
         } catch (NoSuchBatchException e) {
           continue;
         }
