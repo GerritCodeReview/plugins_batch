@@ -19,7 +19,6 @@ import com.google.gerrit.reviewdb.client.File;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.MetaDataUpdate;
 import com.google.gerrit.server.git.VersionedMetaData;
-import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import java.io.IOException;
@@ -53,7 +52,7 @@ public class GitFile extends VersionedMetaData {
     this.file = file.get();
   }
 
-  public String read() throws ConfigInvalidException, IOException, NoSuchProjectException {
+  public String read() throws ConfigInvalidException, IOException {
     try (Repository repo = repos.openRepository(branch.getParentKey())) {
       load(repo);
       return text;
@@ -61,7 +60,7 @@ public class GitFile extends VersionedMetaData {
   }
 
   public RevCommit write(String fileContent, String commitMessage)
-      throws ConfigInvalidException, IOException, NoSuchProjectException {
+      throws ConfigInvalidException, IOException {
     try (MetaDataUpdate md = metaDataUpdateFactory.create(branch.getParentKey())) {
       load(md);
       text = fileContent;

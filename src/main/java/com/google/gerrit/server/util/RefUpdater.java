@@ -128,7 +128,7 @@ public class RefUpdater {
     protected Project.NameKey project;
     protected boolean delete;
 
-    protected Update(Args args) throws IOException {
+    protected Update(Args args) {
       this.args = args;
       branch = args.branch;
       project = branch.getParentKey();
