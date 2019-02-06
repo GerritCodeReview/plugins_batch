@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ced4c720_41b4961e",
+        "filename": "src/main/java/com/google/gerrit/server/git/meta/GitFile.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-02-06T04:41:02Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "b3940e62_4d2e6f45",
+      "range": {
+        "startLine": 56,
+        "startChar": 67,
+        "endLine": 56,
+        "endChar": 80
+      },
+      "revId": "99f60f2a654881a463f0399fc3233bb5da8cd6e0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21ddfbe9_d78f4c47",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/batch/BatchStore.java",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "99f60f2a654881a463f0399fc3233bb5da8cd6e0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27dbb9f6_7c91ead8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/batch/BatchStore.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-02-06T04:41:02Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "21ddfbe9_d78f4c47",
+      "range": {
+        "startLine": 104,
+        "startChar": 13,
+        "endLine": 104,
+        "endChar": 37
+      },
+      "revId": "99f60f2a654881a463f0399fc3233bb5da8cd6e0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
