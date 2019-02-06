@@ -82,7 +82,7 @@ public class ListBatches {
       pred = queryBuilder.parse(Joiner.on(" ").join(query));
       includeBatchInfo = true;
     }
-    List<Batch> batches = new ArrayList<Batch>();
+    List<Batch> batches = new ArrayList<>();
     for (Batch batch : store.find(includeBatchInfo)) {
       if (pred == null || pred.asMatchable().match(batch)) {
         batches.add(batch);

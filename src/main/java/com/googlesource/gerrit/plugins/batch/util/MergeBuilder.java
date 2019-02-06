@@ -158,9 +158,8 @@ public class MergeBuilder implements Callable<ObjectId> {
   protected ThreeWayMerger getMerger(Repository repo) {
     if (strategy == MergeStrategy.RESOLVE) {
       return MergeStrategy.RESOLVE.newMerger(repo, true);
-    } else {
-      return MergeStrategy.SIMPLE_TWO_WAY_IN_CORE.newMerger(repo);
     }
+    return MergeStrategy.SIMPLE_TWO_WAY_IN_CORE.newMerger(repo);
   }
 
   protected CommitBuilder buildCommit(Merger merger) {

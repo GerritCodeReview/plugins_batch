@@ -102,6 +102,7 @@ public class BatchStore {
     } catch (ConfigInvalidException e) { // Not real, never going to be thrown
       throw new RuntimeException(e);
     } catch (NoSuchProjectException e) {
+      // Fall through
     }
     throw new NoSuchBatchException(id);
   }

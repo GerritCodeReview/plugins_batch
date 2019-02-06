@@ -69,7 +69,7 @@ public class PatchSetArgument {
       }
     }
 
-    protected PatchSet.Id parsePatchSet(String patchIdentity) throws UnloggedFailure, OrmException {
+    protected PatchSet.Id parsePatchSet(String patchIdentity) throws UnloggedFailure {
       // By older style change,patchset
       if (patchIdentity.matches("^[1-9][0-9]*,[1-9][0-9]*$")) {
         try {

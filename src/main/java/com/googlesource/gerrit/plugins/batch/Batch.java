@@ -53,7 +53,7 @@ public class Batch {
 
     public void add(PatchSet.Id psId) {
       if (changes == null) {
-        changes = new ArrayList<Change>();
+        changes = new ArrayList<>();
       }
       changes.add(new Batch.Change(psId));
     }
@@ -88,7 +88,7 @@ public class Batch {
 
   public Destination getDestination(Branch.NameKey branch) {
     if (destinations == null) {
-      destinations = new ArrayList<Destination>();
+      destinations = new ArrayList<>();
     }
     Destination dest = getExistingDestination(branch);
     if (dest == null) {
@@ -102,7 +102,7 @@ public class Batch {
 
   protected Destination getExistingDestination(Branch.NameKey branch) {
     if (destinations == null) {
-      destinations = new ArrayList<Destination>();
+      destinations = new ArrayList<>();
     }
     for (Destination dest : destinations) {
       if (dest.project.equals(branch.getParentKey().get()) && dest.ref.equals(branch.get())) {

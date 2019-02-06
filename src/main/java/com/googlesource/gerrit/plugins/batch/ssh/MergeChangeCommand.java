@@ -25,7 +25,6 @@ import com.google.gerrit.server.project.NoSuchRefException;
 import com.google.gerrit.sshd.CommandMetaData;
 import com.google.gerrit.sshd.SshCommand;
 import com.google.gerrit.util.cli.Options;
-import com.google.gwtorm.server.OrmException;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.batch.Batch;
 import com.googlesource.gerrit.plugins.batch.BatchCloser;
@@ -69,7 +68,7 @@ public class MergeChangeCommand extends SshCommand {
   public boolean close;
 
   protected LinkedHashMap<PatchSet.Id, PatchSetArgument> patchSetArgumentsByPatchSet =
-      new LinkedHashMap<PatchSet.Id, PatchSetArgument>();
+      new LinkedHashMap<>();
 
   @Argument(
       index = 0,
@@ -89,8 +88,7 @@ public class MergeChangeCommand extends SshCommand {
   @Inject protected ReviewDb db;
   @Inject protected IdentifiedUser user;
   @Inject protected GitRepositoryManager repoManager;
-  protected Map<PatchSet.Id, List<ObjectId>> parentsByPsarg =
-      new HashMap<PatchSet.Id, List<ObjectId>>();
+  protected Map<PatchSet.Id, List<ObjectId>> parentsByPsarg = new HashMap<>();
 
   @Override
   public void run() throws Exception {
@@ -120,7 +118,7 @@ public class MergeChangeCommand extends SshCommand {
   }
 
   protected boolean isParentMergedInto(PatchSetArgument psarg, Iterable<ObjectId> sha1s)
-      throws IOException, OrmException, RepositoryNotFoundException {
+      throws IOException, RepositoryNotFoundException {
     for (ObjectId sha1 : sha1s) {
       if (isParentMergedInto(psarg, sha1)) {
         return true;
@@ -130,7 +128,7 @@ public class MergeChangeCommand extends SshCommand {
   }
 
   protected boolean isParentMergedInto(PatchSetArgument psarg, ObjectId sha1)
-      throws IOException, OrmException, RepositoryNotFoundException {
+      throws IOException, RepositoryNotFoundException {
     List<ObjectId> parents = getParents(psarg);
     if (parents.isEmpty()) {
       return true;
@@ -164,7 +162,7 @@ public class MergeChangeCommand extends SshCommand {
   }
 
   protected void merge(Batch batch, Change change, PatchSet ps)
-      throws Exception, IOException, NoSuchRefException, OrmException, UnloggedFailure {
+      throws Exception, IOException, NoSuchRefException, UnloggedFailure {
     Branch.NameKey branch = change.getDest();
     Batch.Destination dest = batch.getDestination(branch);
     dest.sha1 =
@@ -200,21 +198,19 @@ public class MergeChangeCommand extends SshCommand {
     }
 
     protected class Destination {
-      List<PatchSetArgument> remaining = new ArrayList<PatchSetArgument>();
-      Set<ObjectId> sources = new HashSet<ObjectId>();
+      List<PatchSetArgument> remaining = new ArrayList<>();
+      Set<ObjectId> sources = new HashSet<>();
 
       Destination(Branch.NameKey branch) throws IOException, NoSuchRefException {
         sources.add(getTip(branch));
       }
     }
 
-    protected Map<Branch.NameKey, Destination> destinationsByBranches =
-        new HashMap<Branch.NameKey, Destination>();
-    protected List<PatchSetArgument> resolved = new ArrayList<PatchSetArgument>();
+    protected Map<Branch.NameKey, Destination> destinationsByBranches = new HashMap<>();
+    protected List<PatchSetArgument> resolved = new ArrayList<>();
 
     protected Resolver(Iterable<PatchSetArgument> psargs)
-        throws Exception, IOException, OrmException, NoSuchRefException,
-            RepositoryNotFoundException {
+        throws Exception, IOException, NoSuchRefException, RepositoryNotFoundException {
       add(psargs);
       while (resolve()) {}
       for (Destination dest : destinationsByBranches.values()) {
@@ -225,8 +221,7 @@ public class MergeChangeCommand extends SshCommand {
       Collections.reverse(resolved); // Reduces merges
     }
 
-    protected boolean resolve()
-        throws IOException, OrmException, NoSuchRefException, RepositoryNotFoundException {
+    protected boolean resolve() throws IOException, RepositoryNotFoundException {
       boolean found = false;
       for (Destination dest : destinationsByBranches.values()) {
         // If more dependencies are destined for the same branch than not,
@@ -239,8 +234,7 @@ public class MergeChangeCommand extends SshCommand {
       return found;
     }
 
-    protected boolean resolve(Destination dest)
-        throws IOException, OrmException, NoSuchRefException, RepositoryNotFoundException {
+    protected boolean resolve(Destination dest) throws IOException, RepositoryNotFoundException {
       boolean found = false;
       for (PatchSetArgument psarg : dest.remaining) {
         if (isParentMergedInto(psarg, dest.sources)) {
@@ -288,7 +282,7 @@ public class MergeChangeCommand extends SshCommand {
   protected List<ObjectId> loadParents(PatchSetArgument psarg) throws IOException {
     try (Repository repo = repoManager.openRepository(psarg.change.getProject());
         RevWalk revWalk = new RevWalk(repo)) {
-      List<ObjectId> parents = new ArrayList<ObjectId>();
+      List<ObjectId> parents = new ArrayList<>();
       ObjectId id = ObjectId.fromString(psarg.patchSet.getRevision().get());
       RevCommit c = revWalk.parseCommit(id);
       for (RevCommit parent : c.getParents()) {
