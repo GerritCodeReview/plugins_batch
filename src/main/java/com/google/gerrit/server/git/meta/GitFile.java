@@ -16,6 +16,7 @@ package com.google.gerrit.server.git.meta;
 
 import com.google.gerrit.reviewdb.client.Branch;
 import com.google.gerrit.reviewdb.client.File;
+import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.MetaDataUpdate;
 import com.google.gerrit.server.git.VersionedMetaData;
@@ -24,6 +25,7 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import java.io.IOException;
 import org.eclipse.jgit.errors.ConfigInvalidException;
+import org.eclipse.jgit.errors.RepositoryNotFoundException;
 import org.eclipse.jgit.lib.CommitBuilder;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -54,20 +56,26 @@ public class GitFile extends VersionedMetaData {
   }
 
   public String read() throws ConfigInvalidException, IOException, NoSuchProjectException {
-    try (Repository repo = repos.openRepository(branch.getParentKey())) {
+    Project.NameKey project = branch.getParentKey();
+    try (Repository repo = repos.openRepository(project)) {
       load(repo);
       return text;
+    } catch (RepositoryNotFoundException e) {
+      throw new NoSuchProjectException(project);
     }
   }
 
   public RevCommit write(String fileContent, String commitMessage)
       throws ConfigInvalidException, IOException, NoSuchProjectException {
-    try (MetaDataUpdate md = metaDataUpdateFactory.create(branch.getParentKey())) {
+    Project.NameKey project = branch.getParentKey();
+    try (MetaDataUpdate md = metaDataUpdateFactory.create(project)) {
       load(md);
       text = fileContent;
       md.getCommitBuilder().setCommitter(metaDataUpdateFactory.getUserPersonIdent());
       md.setMessage(commitMessage);
       return commit(md);
+    } catch (RepositoryNotFoundException e) {
+      throw new NoSuchProjectException(project);
     }
   }
 
