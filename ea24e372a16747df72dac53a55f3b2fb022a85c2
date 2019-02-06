@@ -22,6 +22,30 @@
       "revId": "ea24e372a16747df72dac53a55f3b2fb022a85c2",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71032a74_02c39869",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/batch/BatchStore.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-02-06T23:28:49Z",
+      "side": 1,
+      "message": "No, this comment was for humans. The other one was for Eclipse which warns about missing break on a switch case.\n\nNote: Eclipse can also warn about empty catch blocks, but that is not enabled.",
+      "parentUuid": "6454bae9_9b5717f7",
+      "range": {
+        "startLine": 105,
+        "startChar": 8,
+        "endLine": 105,
+        "endChar": 21
+      },
+      "revId": "ea24e372a16747df72dac53a55f3b2fb022a85c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
