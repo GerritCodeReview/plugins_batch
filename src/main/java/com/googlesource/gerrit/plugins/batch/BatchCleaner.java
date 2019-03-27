@@ -17,6 +17,7 @@ package com.googlesource.gerrit.plugins.batch;
 import static java.util.concurrent.TimeUnit.DAYS;
 import static java.util.concurrent.TimeUnit.MINUTES;
 
+import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.server.CurrentUser;
@@ -30,12 +31,10 @@ import com.google.inject.Provider;
 import java.util.ArrayList;
 import java.util.concurrent.ScheduledFuture;
 import org.eclipse.jgit.lib.Config;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /** Clean up expired batches daily. */
 public class BatchCleaner implements CancelableRunnable {
-  private static final Logger log = LoggerFactory.getLogger(BatchCleaner.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   public static class Lifecycle implements LifecycleListener {
     public static final long DEFAULT_START_MINUTES = MINUTES.convert(1, MINUTES);
@@ -119,7 +118,7 @@ public class BatchCleaner implements CancelableRunnable {
     try {
       batches = list.getBatches();
     } catch (Exception e) {
-      log.error("getting list of batches to clean.", e);
+      log.atSevere().withCause(e).log("getting list of batches to clean.");
       // Ignore errors and hope someone notices the log file and fixes before the next run
       return;
     }
@@ -131,7 +130,7 @@ public class BatchCleaner implements CancelableRunnable {
       try {
         remover.remove(batch.id);
       } catch (Exception e) {
-        log.error("cleaning batch: " + batch.id, e);
+        log.atSevere().withCause(e).log("cleaning batch: %s", batch.id);
         // Ignore errors and hope someone notices the log file and fixes before the next run
       }
     }
