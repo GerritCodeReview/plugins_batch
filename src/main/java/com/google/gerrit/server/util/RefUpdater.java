@@ -13,6 +13,7 @@
 // limitations under the License.
 package com.google.gerrit.server.util;
 
+import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.reviewdb.client.Branch;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.CurrentUser;
@@ -32,11 +33,9 @@ import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.PersonIdent;
 import org.eclipse.jgit.lib.RefUpdate;
 import org.eclipse.jgit.lib.Repository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class RefUpdater {
-  private static final Logger log = LoggerFactory.getLogger(RefUpdater.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   public class Args {
     public final Branch.NameKey branch;
@@ -142,7 +141,8 @@ public class RefUpdater {
           initUpdate();
           handleResult(runUpdate());
         } catch (IOException err) {
-          log.error("RefUpdate failed: branch not updated: " + branch.get(), err);
+          log.atSevere().withCause(err).log(
+              "RefUpdate failed: branch not updated: %s", branch.get());
           throw err;
         } finally {
           repo.close();

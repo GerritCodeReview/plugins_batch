@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.batch;
 
+import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.extensions.restapi.AuthException;
 import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.gerrit.reviewdb.client.Branch;
@@ -49,11 +50,9 @@ import org.eclipse.jgit.lib.ObjectInserter;
 import org.eclipse.jgit.lib.ObjectReader;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevWalk;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class BatchSubmitter {
-  private static final Logger log = LoggerFactory.getLogger(BatchSubmitter.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   protected final ReviewDb db;
   protected final GitRepositoryManager repoManager;
@@ -156,7 +155,7 @@ public class BatchSubmitter {
     Change change = changeNotes.getChange();
     PatchSet ps = psUtil.get(db, changeNotes, psId);
     if (change == null || ps == null) {
-      log.error("" + psId + " is missing");
+      log.atSevere().log("%s is missing", psId);
       return;
     }
 
