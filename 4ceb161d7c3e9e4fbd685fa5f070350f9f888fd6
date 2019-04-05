@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9cd3213e_71fe8778",
+        "filename": "WORKSPACE",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-04-05T21:01:21Z",
+      "side": 1,
+      "message": "At some point we should move this to the master revision and build with 3.0-SNAPSHOT.",
+      "revId": "4ceb161d7c3e9e4fbd685fa5f070350f9f888fd6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
