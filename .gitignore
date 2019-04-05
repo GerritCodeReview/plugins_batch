@@ -10,3 +10,4 @@
 /buck-cache
 /buck-out
 *.iml
+/.apt_generated/
