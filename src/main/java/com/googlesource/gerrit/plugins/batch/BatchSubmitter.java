@@ -43,7 +43,6 @@ import com.google.gwtorm.server.OrmException;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.batch.exception.NoSuchBatchException;
 import java.io.IOException;
-import java.util.Collection;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.ObjectInserter;
@@ -126,9 +125,7 @@ public class BatchSubmitter {
           RestApiException, UpdateException, PermissionBackendException {
     for (Batch.Destination dest : batch.listDestinations()) {
       updateRef(dest);
-      if (dest.changes != null) {
-        closeChanges(dest.changes);
-      }
+      closeChanges(dest);
     }
   }
 
@@ -139,15 +136,17 @@ public class BatchSubmitter {
     refUpdater.forceUpdate(branch, ObjectId.fromString(dest.sha1));
   }
 
-  private void closeChanges(Collection<Batch.Change> changes)
+  private void closeChanges(Batch.Destination dest)
       throws IOException, OrmException, RepositoryNotFoundException, RestApiException,
           UpdateException, PermissionBackendException {
-    for (Batch.Change change : changes) {
-      closeChange(change.toPatchSetId());
+    if (dest.changes != null) {
+      for (Batch.Change change : dest.changes) {
+        closeChange(change.toPatchSetId(), dest.sha1);
+      }
     }
   }
 
-  private void closeChange(PatchSet.Id psId)
+  private void closeChange(PatchSet.Id psId, String sha1)
       throws IOException, OrmException, RepositoryNotFoundException, RestApiException,
           UpdateException, PermissionBackendException {
     ChangeNotes changeNotes = notesFactory.createChecked(psId.getParentKey());
@@ -178,7 +177,7 @@ public class BatchSubmitter {
       bu.setRefLogMessage("merged (batch submit)");
       bu.addOp(
           psId.getParentKey(),
-          mergedByPushOpFactory.create(requestScopePropagator, psId, destination.get()));
+          mergedByPushOpFactory.create(requestScopePropagator, psId, destination.get(), sha1));
       bu.execute();
     }
   }
