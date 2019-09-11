@@ -22,6 +22,30 @@
       "revId": "f2c5bb696b609fc63b114ffc1b56261be3e55045",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce611259_c1e802d4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/batch/BatchSubmitter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2019-09-11T15:51:00Z",
+      "side": 1,
+      "message": "Any counter-feedback before I approve this change (if I may)?",
+      "parentUuid": "0525277a_0299852c",
+      "range": {
+        "startLine": 144,
+        "startChar": 43,
+        "endLine": 144,
+        "endChar": 52
+      },
+      "revId": "f2c5bb696b609fc63b114ffc1b56261be3e55045",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
