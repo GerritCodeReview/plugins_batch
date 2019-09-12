@@ -94,6 +94,30 @@
       "revId": "f2c5bb696b609fc63b114ffc1b56261be3e55045",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15386b3c_92e9b567",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/batch/BatchSubmitter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-09-12T00:29:11Z",
+      "side": 1,
+      "message": "Sven\u0027s change does not seem to explain his fix. :(\n\nIt feels like a major API change that I am not convinced was the right thing to do. I am not sure this fixes things then since won\u0027t this still trigger things once for each change, but then always have the same sha1, or does Sven\u0027s change somehow deduplicate those?",
+      "parentUuid": "ecb6fb24_eb7fd247",
+      "range": {
+        "startLine": 144,
+        "startChar": 43,
+        "endLine": 144,
+        "endChar": 52
+      },
+      "revId": "f2c5bb696b609fc63b114ffc1b56261be3e55045",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
