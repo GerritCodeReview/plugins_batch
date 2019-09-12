@@ -70,6 +70,30 @@
       "revId": "f2c5bb696b609fc63b114ffc1b56261be3e55045",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d471a5d_ad9bc757",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/batch/BatchSubmitter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-09-12T00:20:11Z",
+      "side": 1,
+      "message": "The intention of Sven\u0027s change that introduced the new argument was to set the \"new rev\" value on the change merged event to the new tip of the branch in the case where multiple changes are submitted at the same time.\n\nPreviously the new rev would be the sha1 of each change, which IIUC is what you are suggesting here, and would be in effect reintroducing the issue that Sven fixed.",
+      "parentUuid": "ecb6fb24_eb7fd247",
+      "range": {
+        "startLine": 144,
+        "startChar": 43,
+        "endLine": 144,
+        "endChar": 52
+      },
+      "revId": "f2c5bb696b609fc63b114ffc1b56261be3e55045",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
