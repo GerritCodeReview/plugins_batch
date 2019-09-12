@@ -46,6 +46,30 @@
       "revId": "f2c5bb696b609fc63b114ffc1b56261be3e55045",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecb6fb24_eb7fd247",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/batch/BatchSubmitter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-09-12T00:13:47Z",
+      "side": 1,
+      "message": "That is the intent of dest.sha1, however that might be more then what is desired here? If there are two changes destined for the same branch in the batch, this will close both of them on each iteration. To prevent that I think that we would need to store the sha1 of each change (assuming the plugin currently supports cherry-picking, I don\u0027t remember), and use that sha1 instead.",
+      "parentUuid": "ce611259_c1e802d4",
+      "range": {
+        "startLine": 144,
+        "startChar": 43,
+        "endLine": 144,
+        "endChar": 52
+      },
+      "revId": "f2c5bb696b609fc63b114ffc1b56261be3e55045",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
