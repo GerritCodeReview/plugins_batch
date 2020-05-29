@@ -12,40 +12,37 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.google.gerrit.reviewdb.client;
+package com.google.gerrit.entities;
 
-import com.google.gwtorm.client.StringKey;
+import com.google.gerrit.entities.BranchNameKey;
+import com.google.gerrit.entities.Project;
 
 public class File {
   /** An immutable reference to a file in gerrit repo. */
-  public static class NameKey extends StringKey<Branch.NameKey> {
-    private static final long serialVersionUID = 1L;
-
-    protected Branch.NameKey branch;
+  public static class NameKey implements Comparable<NameKey> {
+    protected BranchNameKey branch;
     protected String fileName;
 
     protected NameKey() {
-      branch = new Branch.NameKey(new Project.NameKey(null), null);
+      branch = BranchNameKey.create(Project.nameKey(null), null);
     }
 
-    public NameKey(Branch.NameKey br, String file) {
+    public NameKey(BranchNameKey br, String file) {
       branch = br;
       fileName = file;
     }
 
-    @Override
     public String get() {
       return fileName;
     }
 
-    @Override
-    protected void set(String file) {
-      fileName = file;
+    public BranchNameKey getParentKey() {
+      return branch;
     }
 
     @Override
-    public Branch.NameKey getParentKey() {
-      return branch;
+    public final int compareTo(NameKey o) {
+      return get().compareTo(o.get());
     }
   }
 }

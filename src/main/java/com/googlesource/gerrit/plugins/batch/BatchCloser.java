@@ -13,8 +13,8 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.batch;
 
-import com.google.gerrit.reviewdb.client.Branch;
-import com.google.gerrit.reviewdb.client.Project;
+import com.google.gerrit.entities.BranchNameKey;
+import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.gerrit.server.util.RefUpdater;
@@ -47,8 +47,8 @@ public class BatchCloser {
   protected void createDownloadRefs(Batch batch) throws IOException, NoSuchProjectException {
     for (Batch.Destination dest : batch.listDestinations()) {
       dest.downloadRef = getBatchRef(batch, dest);
-      Project.NameKey project = new Project.NameKey(dest.project);
-      Branch.NameKey branch = new Branch.NameKey(project, dest.downloadRef);
+      Project.NameKey project = Project.nameKey(dest.project);
+      BranchNameKey branch = BranchNameKey.create(project, dest.downloadRef);
       ObjectId id = ObjectId.fromString(dest.sha1);
       refUpdater.update(branch, ObjectId.zeroId(), id);
     }
