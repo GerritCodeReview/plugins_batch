@@ -89,7 +89,7 @@ public class MergeBranch implements Callable<ObjectId> {
       throws IOException, NoSuchRefException, RepositoryNotFoundException, IntegrationException,
           BadRequestException {
     try (Repository repo = repoManager.openRepository(projectName)) {
-      Ref destRef = repo.getRefDatabase().getRef(destName);
+      Ref destRef = repo.getRefDatabase().exactRef(destName);
       if (destRef == null) {
         throw new NoSuchRefException(destName);
       }

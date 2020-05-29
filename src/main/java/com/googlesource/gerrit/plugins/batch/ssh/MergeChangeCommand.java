@@ -13,12 +13,11 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.batch.ssh;
 
+import com.google.gerrit.json.OutputFormat;
 import com.google.gerrit.reviewdb.client.Branch;
 import com.google.gerrit.reviewdb.client.Change;
 import com.google.gerrit.reviewdb.client.PatchSet;
 import com.google.gerrit.reviewdb.client.Project;
-import com.google.gerrit.reviewdb.server.ReviewDb;
-import com.google.gerrit.server.OutputFormat;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.project.NoSuchRefException;
 import com.google.gerrit.sshd.CommandMetaData;
@@ -84,7 +83,6 @@ public class MergeChangeCommand extends SshCommand {
   @Inject protected PatchSetArgument.Factory patchSetArgumentFactory;
   @Inject protected MergeBranch.Factory mergeBranchFactory;
   @Inject protected BatchCloser batchCloser;
-  @Inject protected ReviewDb db;
   @Inject protected GitRepositoryManager repoManager;
   protected Map<PatchSet.Id, List<ObjectId>> parentsByPsarg = new HashMap<>();
 
@@ -151,7 +149,7 @@ public class MergeChangeCommand extends SshCommand {
   protected ObjectId getTip(Branch.NameKey branch)
       throws IOException, NoSuchRefException, RepositoryNotFoundException {
     try (Repository repo = repoManager.openRepository(branch.getParentKey())) {
-      Ref ref = repo.getRefDatabase().getRef(branch.get());
+      Ref ref = repo.getRefDatabase().exactRef(branch.get());
       if (ref == null) {
         throw new NoSuchRefException(branch.toString());
       }

@@ -14,7 +14,7 @@
 
 package com.googlesource.gerrit.plugins.batch.ssh;
 
-import com.google.gerrit.server.OutputFormat;
+import com.google.gerrit.json.OutputFormat;
 import com.google.gerrit.server.permissions.PermissionBackendException;
 import com.google.gerrit.sshd.CommandMetaData;
 import com.google.gerrit.sshd.SshCommand;

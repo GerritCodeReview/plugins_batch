@@ -21,7 +21,6 @@ import com.google.gerrit.reviewdb.client.Branch;
 import com.google.gerrit.reviewdb.client.Change;
 import com.google.gerrit.reviewdb.client.PatchSet;
 import com.google.gerrit.reviewdb.client.Project;
-import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.PatchSetUtil;
 import com.google.gerrit.server.git.GitRepositoryManager;
@@ -39,7 +38,6 @@ import com.google.gerrit.server.update.UpdateException;
 import com.google.gerrit.server.util.RefUpdater;
 import com.google.gerrit.server.util.RequestScopePropagator;
 import com.google.gerrit.server.util.time.TimeUtil;
-import com.google.gwtorm.server.OrmException;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.batch.exception.NoSuchBatchException;
 import java.io.IOException;
@@ -48,13 +46,14 @@ import org.eclipse.jgit.errors.RepositoryNotFoundException;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.ObjectInserter;
 import org.eclipse.jgit.lib.ObjectReader;
+import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
 
 public class BatchSubmitter {
   private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
-  protected final ReviewDb db;
   protected final GitRepositoryManager repoManager;
   protected final RefUpdater refUpdater;
   protected final RequestScopePropagator requestScopePropagator;
@@ -69,7 +68,6 @@ public class BatchSubmitter {
 
   @Inject
   BatchSubmitter(
-      ReviewDb db,
       GitRepositoryManager repoManager,
       RefUpdater refUpdater,
       RequestScopePropagator requestScopePropagator,
@@ -81,7 +79,6 @@ public class BatchSubmitter {
       PatchSetUtil psUtil,
       BatchStore store,
       BatchRemover remover) {
-    this.db = db;
     this.repoManager = repoManager;
     this.refUpdater = refUpdater;
     this.requestScopePropagator = requestScopePropagator;
@@ -97,7 +94,7 @@ public class BatchSubmitter {
 
   public Batch submit(String id)
       throws IOException, IllegalStateException, NoSuchBatchException, NoSuchProjectException,
-          OrmException, RestApiException, UpdateException, PermissionBackendException {
+          RestApiException, UpdateException, PermissionBackendException {
     Batch batch = store.read(id);
     if (batch.state == Batch.State.OPEN) {
       throw new IllegalStateException("Cannot submit batch " + id + " in state " + batch.state);
@@ -122,8 +119,8 @@ public class BatchSubmitter {
   }
 
   private void submit(Batch batch)
-      throws IOException, OrmException, NoSuchProjectException, RepositoryNotFoundException,
-          RestApiException, UpdateException, PermissionBackendException {
+      throws IOException, NoSuchProjectException, RepositoryNotFoundException, RestApiException,
+          UpdateException, PermissionBackendException {
     for (Batch.Destination dest : batch.listDestinations()) {
       updateRef(dest);
       if (dest.changes != null) {
@@ -140,20 +137,20 @@ public class BatchSubmitter {
   }
 
   private void closeChanges(Collection<Batch.Change> changes)
-      throws IOException, OrmException, RepositoryNotFoundException, RestApiException,
-          UpdateException, PermissionBackendException {
+      throws IOException, RepositoryNotFoundException, RestApiException, UpdateException,
+          PermissionBackendException {
     for (Batch.Change change : changes) {
       closeChange(change.toPatchSetId());
     }
   }
 
   private void closeChange(PatchSet.Id psId)
-      throws IOException, OrmException, RepositoryNotFoundException, RestApiException,
-          UpdateException, PermissionBackendException {
+      throws IOException, RepositoryNotFoundException, RestApiException, UpdateException,
+          PermissionBackendException {
     ChangeNotes changeNotes = notesFactory.createChecked(psId.getParentKey());
-    permissionBackend.user(user).database(db).change(changeNotes).check(ChangePermission.READ);
+    permissionBackend.user(user).change(changeNotes).check(ChangePermission.READ);
     Change change = changeNotes.getChange();
-    PatchSet ps = psUtil.get(db, changeNotes, psId);
+    PatchSet ps = psUtil.get(changeNotes, psId);
     if (change == null || ps == null) {
       log.atSevere().log("%s is missing", psId);
       return;
@@ -170,15 +167,18 @@ public class BatchSubmitter {
             TraceContext.open()
                 .addTag(RequestId.Type.SUBMISSION_ID, new RequestId(change.getId().toString()));
         Repository repo = repoManager.openRepository(project);
-        BatchUpdate bu = batchUpdateFactory.create(db, project, user, TimeUtil.nowTs());
+        BatchUpdate bu = batchUpdateFactory.create(project, user, TimeUtil.nowTs());
         ObjectInserter ins = repo.newObjectInserter();
         ObjectReader reader = ins.newReader();
         RevWalk walk = new RevWalk(reader)) {
-      bu.setRepository(repo, walk, ins).updateChangesInParallel();
+      Ref destRef = repo.getRefDatabase().exactRef(destination.get());
+      RevCommit newTip = walk.parseCommit(destRef.getObjectId());
+      bu.setRepository(repo, walk, ins);
       bu.setRefLogMessage("merged (batch submit)");
       bu.addOp(
           psId.getParentKey(),
-          mergedByPushOpFactory.create(requestScopePropagator, psId, destination.get()));
+          mergedByPushOpFactory.create(
+              requestScopePropagator, psId, destination.get(), newTip.getId().getName()));
       bu.execute();
     }
   }

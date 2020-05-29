@@ -20,9 +20,8 @@ import com.google.gerrit.common.data.GlobalCapability;
 import com.google.gerrit.extensions.annotations.RequiresCapability;
 import com.google.gerrit.index.query.Predicate;
 import com.google.gerrit.index.query.QueryParseException;
-import com.google.gerrit.server.OutputFormat;
+import com.google.gerrit.json.OutputFormat;
 import com.google.gson.reflect.TypeToken;
-import com.google.gwtorm.server.OrmException;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.batch.query.BatchQueryBuilder;
 import java.io.BufferedWriter;
@@ -58,8 +57,7 @@ public class ListBatches {
     this.store = store;
   }
 
-  public void display(OutputStream displayOutputStream)
-      throws IOException, OrmException, QueryParseException {
+  public void display(OutputStream displayOutputStream) throws IOException, QueryParseException {
     try {
       PrintWriter stdout =
           new PrintWriter(new BufferedWriter(new OutputStreamWriter(displayOutputStream, UTF_8)));
@@ -76,7 +74,7 @@ public class ListBatches {
     }
   }
 
-  public List<Batch> getBatches() throws IOException, OrmException, QueryParseException {
+  public List<Batch> getBatches() throws IOException, QueryParseException {
     Predicate<Batch> pred = null;
     if (query != null) {
       pred = queryBuilder.parse(Joiner.on(" ").join(query));

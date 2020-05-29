@@ -22,7 +22,7 @@ limitations under the License.
   <groupId>com.googlesource.gerrit.plugins.batch</groupId>
   <artifactId>batch</artifactId>
   <packaging>jar</packaging>
-  <version>2.16</version>
+  <version>3.0.9</version>
   <name>batch</name>
 
   <properties>
