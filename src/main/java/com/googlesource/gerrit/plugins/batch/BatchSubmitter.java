@@ -15,12 +15,12 @@
 package com.googlesource.gerrit.plugins.batch;
 
 import com.google.common.flogger.FluentLogger;
+import com.google.gerrit.entities.BranchNameKey;
+import com.google.gerrit.entities.Change;
+import com.google.gerrit.entities.PatchSet;
+import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.restapi.AuthException;
 import com.google.gerrit.extensions.restapi.RestApiException;
-import com.google.gerrit.reviewdb.client.Branch;
-import com.google.gerrit.reviewdb.client.Change;
-import com.google.gerrit.reviewdb.client.PatchSet;
-import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.PatchSetUtil;
 import com.google.gerrit.server.git.GitRepositoryManager;
@@ -111,7 +111,7 @@ public class BatchSubmitter {
   private void ensureCanSubmit(Batch.Destination dest)
       throws AuthException, PermissionBackendException {
     PermissionBackend.ForProject permissions =
-        permissionBackend.user(user).project(new Project.NameKey(dest.project));
+        permissionBackend.user(user).project(Project.nameKey(dest.project));
     permissions.ref(dest.ref).check(RefPermission.FORCE_UPDATE);
   }
 
@@ -126,8 +126,8 @@ public class BatchSubmitter {
 
   private void updateRef(Batch.Destination dest)
       throws IOException, NoSuchProjectException, RepositoryNotFoundException {
-    Project.NameKey project = new Project.NameKey(dest.project);
-    Branch.NameKey branch = new Branch.NameKey(project, dest.ref);
+    Project.NameKey project = Project.nameKey(dest.project);
+    BranchNameKey branch = BranchNameKey.create(project, dest.ref);
     refUpdater.forceUpdate(branch, ObjectId.fromString(dest.sha1));
   }
 
@@ -144,7 +144,7 @@ public class BatchSubmitter {
   private void closeChange(PatchSet.Id psId, String sha1)
       throws IOException, RepositoryNotFoundException, RestApiException, UpdateException,
           PermissionBackendException {
-    ChangeNotes changeNotes = notesFactory.createChecked(psId.getParentKey());
+    ChangeNotes changeNotes = notesFactory.createChecked(psId.changeId());
     permissionBackend.user(user).change(changeNotes).check(ChangePermission.READ);
     Change change = changeNotes.getChange();
     PatchSet ps = psUtil.get(changeNotes, psId);
@@ -157,8 +157,8 @@ public class BatchSubmitter {
         || change.getStatus() == Change.Status.ABANDONED) {
       return;
     }
-    Branch.NameKey destination = change.getDest();
-    Project.NameKey project = destination.getParentKey();
+    BranchNameKey destination = change.getDest();
+    Project.NameKey project = destination.project();
 
     try (TraceContext traceContext =
             TraceContext.open()
@@ -171,8 +171,8 @@ public class BatchSubmitter {
       bu.setRepository(repo, walk, ins);
       bu.setRefLogMessage("merged (batch submit)");
       bu.addOp(
-          psId.getParentKey(),
-          mergedByPushOpFactory.create(requestScopePropagator, psId, destination.get(), sha1));
+          psId.changeId(),
+          mergedByPushOpFactory.create(requestScopePropagator, psId, destination.branch(), sha1));
       bu.execute();
     }
   }

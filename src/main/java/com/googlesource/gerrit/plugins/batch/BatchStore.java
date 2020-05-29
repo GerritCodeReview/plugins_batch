@@ -13,18 +13,28 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.batch;
 
-import com.google.gerrit.reviewdb.client.Branch;
-import com.google.gerrit.reviewdb.client.File;
-import com.google.gerrit.reviewdb.client.Project;
+import com.google.gerrit.entities.Account;
+import com.google.gerrit.entities.BranchNameKey;
+import com.google.gerrit.entities.File;
+import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.config.AllProjectsName;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.meta.GitFile;
 import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.gerrit.server.util.RefUpdater;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.batch.exception.NoSuchBatchException;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.Date;
@@ -39,11 +49,38 @@ public class BatchStore {
   public static final String BATCHES_REF = "refs/meta/batch/batches/";
   public static final String FILE_NAME = "batch.json";
 
+  public static class AccountIdDeserializer
+      implements JsonDeserializer<Account.Id>, JsonSerializer<Account.Id> {
+
+    @Override
+    public Account.Id deserialize(
+        JsonElement json, Type typeOfT, JsonDeserializationContext context)
+        throws JsonParseException {
+      if (json.isJsonNull()) {
+        return null;
+      }
+      if (!json.isJsonPrimitive()) {
+        throw new JsonParseException("Expected int for account.id type");
+      }
+      JsonPrimitive p = (JsonPrimitive) json;
+      if (!p.isNumber()) {
+        throw new JsonParseException("Expected int for account.id type");
+      }
+      return Account.id(p.getAsInt());
+    }
+
+    @Override
+    public JsonElement serialize(Account.Id id, Type typeOfSrc, JsonSerializationContext context) {
+      return new JsonPrimitive(id.get());
+    }
+  }
+
   protected final GitRepositoryManager repoManager;
   protected final Project.NameKey project;
   protected final GitFile.Factory gitFileFactory;
   protected final RefUpdater refUpdater;
-  protected final Gson gson = new Gson();
+  protected final Gson gson =
+      new GsonBuilder().registerTypeAdapter(Account.Id.class, new AccountIdDeserializer()).create();
 
   @Inject
   public BatchStore(
@@ -110,11 +147,11 @@ public class BatchStore {
     return getFileNameKey(getBranch(id));
   }
 
-  protected Branch.NameKey getBranch(String id) {
-    return new Branch.NameKey(project, BATCHES_REF + id);
+  protected BranchNameKey getBranch(String id) {
+    return BranchNameKey.create(project, BATCHES_REF + id);
   }
 
-  protected File.NameKey getFileNameKey(Branch.NameKey branch) {
+  protected File.NameKey getFileNameKey(BranchNameKey branch) {
     return new File.NameKey(branch, FILE_NAME);
   }
 }

@@ -14,8 +14,8 @@
 package com.google.gerrit.server.util;
 
 import com.google.common.flogger.FluentLogger;
-import com.google.gerrit.reviewdb.client.Branch;
-import com.google.gerrit.reviewdb.client.Project;
+import com.google.gerrit.entities.BranchNameKey;
+import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.GerritPersonIdent;
 import com.google.gerrit.server.IdentifiedUser;
@@ -38,14 +38,14 @@ public class RefUpdater {
   private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   public class Args {
-    public final Branch.NameKey branch;
+    public final BranchNameKey branch;
     public ObjectId expectedOldObjectId;
     public ObjectId newObjectId;
     public boolean isForceUpdate;
     public PersonIdent refLogIdent;
     public String refLogMessage;
 
-    public Args(Branch.NameKey branch) {
+    public Args(BranchNameKey branch) {
       this.branch = branch;
       CurrentUser user = userProvider.get();
       if (user instanceof IdentifiedUser) {
@@ -79,13 +79,13 @@ public class RefUpdater {
     this.gitRefUpdated = gitRefUpdated;
   }
 
-  public void update(Branch.NameKey branch, ObjectId oldRefId, ObjectId newRefId)
+  public void update(BranchNameKey branch, ObjectId oldRefId, ObjectId newRefId)
       throws IOException, NoSuchProjectException {
     this.update(branch, oldRefId, newRefId, null);
   }
 
   public void update(
-      Branch.NameKey branch, ObjectId oldRefId, ObjectId newRefId, String refLogMessage)
+      BranchNameKey branch, ObjectId oldRefId, ObjectId newRefId, String refLogMessage)
       throws IOException, NoSuchProjectException {
     Args args = new Args(branch);
     args.expectedOldObjectId = oldRefId;
@@ -94,12 +94,12 @@ public class RefUpdater {
     this.update(args);
   }
 
-  public void forceUpdate(Branch.NameKey branch, ObjectId newRefId)
+  public void forceUpdate(BranchNameKey branch, ObjectId newRefId)
       throws IOException, NoSuchProjectException {
     this.forceUpdate(branch, newRefId, null);
   }
 
-  public void forceUpdate(Branch.NameKey branch, ObjectId newRefId, String refLogMessage)
+  public void forceUpdate(BranchNameKey branch, ObjectId newRefId, String refLogMessage)
       throws IOException, NoSuchProjectException {
     Args args = new Args(branch);
     args.newObjectId = newRefId;
@@ -108,7 +108,7 @@ public class RefUpdater {
     update(args);
   }
 
-  public void delete(Branch.NameKey branch) throws IOException, NoSuchProjectException {
+  public void delete(BranchNameKey branch) throws IOException, NoSuchProjectException {
     Args args = new Args(branch);
     args.newObjectId = ObjectId.zeroId();
     args.isForceUpdate = true;
@@ -123,14 +123,14 @@ public class RefUpdater {
     protected Repository repo;
     protected Args args;
     protected RefUpdate update;
-    protected Branch.NameKey branch;
+    protected BranchNameKey branch;
     protected Project.NameKey project;
     protected boolean delete;
 
     protected Update(Args args) {
       this.args = args;
       branch = args.branch;
-      project = branch.getParentKey();
+      project = branch.project();
       delete = args.newObjectId.equals(ObjectId.zeroId());
     }
 
@@ -142,7 +142,7 @@ public class RefUpdater {
           handleResult(runUpdate());
         } catch (IOException err) {
           log.atSevere().withCause(err).log(
-              "RefUpdate failed: branch not updated: %s", branch.get());
+              "RefUpdate failed: branch not updated: %s", branch.branch());
           throw err;
         } finally {
           repo.close();
@@ -154,7 +154,7 @@ public class RefUpdater {
     }
 
     protected void initUpdate() throws IOException {
-      update = repo.updateRef(branch.get());
+      update = repo.updateRef(branch.branch());
       update.setExpectedOldObjectId(args.expectedOldObjectId);
       update.setNewObjectId(args.newObjectId);
       update.setRefLogIdent(args.refLogIdent);
