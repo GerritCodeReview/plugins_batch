@@ -56,9 +56,9 @@ public class BatchCloser {
 
   protected String getBatchRef(Batch batch, Batch.Destination dest) {
     // AccountId is always present, UserName is optional but the preferred identifier
-    if (user.getUserName() != null) {
+    if (user.getUserName().isPresent()) {
       return String.format(
-          "refs/batch/%s/%s/%s/%s", "users", user.getUserName(), batch.id, dest.ref);
+          "refs/batch/%s/%s/%s/%s", "users", user.getUserName().get(), batch.id, dest.ref);
     }
     return String.format(
         "refs/batch/%s/%s/%s/%s",
