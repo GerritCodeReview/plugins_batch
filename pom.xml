@@ -39,7 +39,7 @@ limitations under the License.
         <configuration>
           <archive>
             <manifestEntries>
-              <Gerrit-PluginName>Batch</Gerrit-PluginName>
+              <Gerrit-PluginName>batch</Gerrit-PluginName>
               <Gerrit-Module>com.googlesource.gerrit.plugins.batch.Module</Gerrit-Module>
               <Gerrit-SshModule>com.googlesource.gerrit.plugins.batch.ssh.SshModule</Gerrit-SshModule>
 
