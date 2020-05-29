@@ -62,8 +62,9 @@ public class BatchStore {
     List<Batch> batches = new ArrayList<>();
     try (Repository repo = repoManager.openRepository(project)) {
       for (Ref ref : repo.getRefDatabase().getRefsByPrefix(BATCHES_REF)) {
+        String id = ref.getName().substring(BATCHES_REF.length());
         try {
-          batches.add((includeBatchInfo == true) ? read(ref.getName()) : new Batch(ref.getName()));
+          batches.add((includeBatchInfo == true) ? read(id) : new Batch(id));
         } catch (NoSuchBatchException e) {
           continue;
         }
