@@ -16,7 +16,6 @@ package com.googlesource.gerrit.plugins.batch.cli;
 import com.google.gerrit.extensions.restapi.AuthException;
 import com.google.gerrit.reviewdb.client.Change;
 import com.google.gerrit.reviewdb.client.PatchSet;
-import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.PatchSetUtil;
 import com.google.gerrit.server.notedb.ChangeNotes;
@@ -24,14 +23,12 @@ import com.google.gerrit.server.permissions.ChangePermission;
 import com.google.gerrit.server.permissions.PermissionBackend;
 import com.google.gerrit.server.permissions.PermissionBackendException;
 import com.google.gerrit.sshd.BaseCommand.UnloggedFailure;
-import com.google.gwtorm.server.OrmException;
 import com.google.inject.Inject;
 
 public class PatchSetArgument {
   public static class Factory {
     protected final PermissionBackend permissionBackend;
     protected final ChangeNotes.Factory notesFactory;
-    protected final ReviewDb reviewDb;
     protected final PatchSetUtil psUtil;
     protected final CurrentUser user;
 
@@ -39,12 +36,10 @@ public class PatchSetArgument {
     protected Factory(
         ChangeNotes.Factory notesFactory,
         PermissionBackend permissionBackend,
-        ReviewDb reviewDb,
         PatchSetUtil psUtil,
         CurrentUser user) {
       this.notesFactory = notesFactory;
       this.permissionBackend = permissionBackend;
-      this.reviewDb = reviewDb;
       this.psUtil = psUtil;
       this.user = user;
     }
@@ -53,19 +48,12 @@ public class PatchSetArgument {
       try {
         PatchSet.Id patchSetId = parsePatchSet(token);
         ChangeNotes changeNotes = notesFactory.createChecked(patchSetId.getParentKey());
-        permissionBackend
-            .user(user)
-            .database(reviewDb)
-            .change(changeNotes)
-            .check(ChangePermission.READ);
-        return new PatchSetArgument(
-            changeNotes.getChange(), psUtil.get(reviewDb, changeNotes, patchSetId));
+        permissionBackend.user(user).change(changeNotes).check(ChangePermission.READ);
+        return new PatchSetArgument(changeNotes.getChange(), psUtil.get(changeNotes, patchSetId));
       } catch (PermissionBackendException | AuthException e) {
         throw new IllegalArgumentException("database error", e);
       } catch (UnloggedFailure e) {
         throw new IllegalArgumentException(e.getMessage(), e);
-      } catch (OrmException e) {
-        throw new IllegalArgumentException("database error", e);
       }
     }
 

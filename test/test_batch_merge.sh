@@ -66,7 +66,7 @@ d_download() { json_val_by_key "$1" download_ref ; } # destination > download_re
 query_by() { echo "$1" | awk '/^ *'"$2"':/{print $2}' ; } # qchange key > val
 
 get_change_num() { # < gerrit_push_response > changenum
-    local url=$(awk '/New Changes:/ { getline; print $2 }')
+    local url=$(awk '$NF ~ /\[NEW\]/ { print $2 }')
     echo "${url##*\/}" | tr -d -c '[:digit:]'
 }
 

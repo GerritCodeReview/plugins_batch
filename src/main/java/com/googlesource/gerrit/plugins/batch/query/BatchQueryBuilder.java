@@ -31,7 +31,7 @@ import java.util.concurrent.TimeUnit;
 import org.eclipse.jgit.lib.Config;
 
 /** Parses a query string meant to be applied to batch objects. */
-public class BatchQueryBuilder extends QueryBuilder<Batch> {
+public class BatchQueryBuilder extends QueryBuilder<Batch, BatchQueryBuilder> {
   public abstract static class SimplePredicate extends OperatorPredicate<Batch>
       implements Matchable<Batch> {
     public SimplePredicate(String op, String val) {
@@ -65,7 +65,7 @@ public class BatchQueryBuilder extends QueryBuilder<Batch> {
       PluginConfigFactory cfgFactory,
       BatchStore store,
       @PluginName String pluginName) {
-    super(mydef);
+    super(mydef, null);
     this.projectCache = projectCache;
     this.cfgFactory = cfgFactory;
     this.store = store;

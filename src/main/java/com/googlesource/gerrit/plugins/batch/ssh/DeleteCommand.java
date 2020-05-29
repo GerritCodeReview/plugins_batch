@@ -15,7 +15,7 @@ package com.googlesource.gerrit.plugins.batch.ssh;
 
 import com.google.gerrit.common.data.GlobalCapability;
 import com.google.gerrit.extensions.annotations.RequiresCapability;
-import com.google.gerrit.server.OutputFormat;
+import com.google.gerrit.json.OutputFormat;
 import com.google.gerrit.sshd.CommandMetaData;
 import com.google.gerrit.sshd.SshCommand;
 import com.google.inject.Inject;
