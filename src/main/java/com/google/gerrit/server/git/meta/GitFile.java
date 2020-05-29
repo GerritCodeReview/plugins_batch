@@ -14,9 +14,9 @@
 
 package com.google.gerrit.server.git.meta;
 
-import com.google.gerrit.reviewdb.client.Branch;
 import com.google.gerrit.reviewdb.client.File;
-import com.google.gerrit.reviewdb.client.Project;
+import com.google.gerrit.entities.BranchNameKey;
+import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.inject.Inject;
@@ -37,7 +37,7 @@ public class GitFile extends VersionedMetaData {
   protected final MetaDataUpdate.User metaDataUpdateFactory;
   protected final GitRepositoryManager repos;
 
-  protected Branch.NameKey branch;
+  protected BranchNameKey branch;
   protected String file;
 
   public String text;
@@ -54,7 +54,7 @@ public class GitFile extends VersionedMetaData {
   }
 
   public String read() throws ConfigInvalidException, IOException, NoSuchProjectException {
-    Project.NameKey project = branch.getParentKey();
+    Project.NameKey project = branch.project();
     try (Repository repo = repos.openRepository(project)) {
       load(project, repo);
       return text;
@@ -65,7 +65,7 @@ public class GitFile extends VersionedMetaData {
 
   public RevCommit write(String fileContent, String commitMessage)
       throws ConfigInvalidException, IOException, NoSuchProjectException {
-    Project.NameKey project = branch.getParentKey();
+    Project.NameKey project = branch.project();
     try (MetaDataUpdate md = metaDataUpdateFactory.create(project)) {
       load(md);
       text = fileContent;
@@ -77,7 +77,7 @@ public class GitFile extends VersionedMetaData {
     }
   }
 
-  public void setBranch(Branch.NameKey branch) {
+  public void setBranch(BranchNameKey branch) {
     this.branch = branch;
   }
 
@@ -87,7 +87,7 @@ public class GitFile extends VersionedMetaData {
 
   @Override
   protected String getRefName() {
-    return branch.get();
+    return branch.branch();
   }
 
   @Override

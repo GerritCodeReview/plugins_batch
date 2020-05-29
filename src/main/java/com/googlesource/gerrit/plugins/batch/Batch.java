@@ -13,9 +13,9 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.batch;
 
-import com.google.gerrit.reviewdb.client.Account;
-import com.google.gerrit.reviewdb.client.Branch;
-import com.google.gerrit.reviewdb.client.PatchSet;
+import com.google.gerrit.entities.Account;
+import com.google.gerrit.entities.PatchSet;
+import com.google.gerrit.entities.BranchNameKey;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -35,12 +35,12 @@ public class Batch {
     int patchSet;
 
     Change(PatchSet.Id psId) {
-      number = psId.getParentKey().get();
+      number = psId.changeId().get();
       patchSet = psId.get();
     }
 
     public PatchSet.Id toPatchSetId() {
-      return new PatchSet.Id(new com.google.gerrit.reviewdb.client.Change.Id(number), patchSet);
+      return PatchSet.id(com.google.gerrit.entities.Change.id(number), patchSet);
     }
   }
 
@@ -86,26 +86,26 @@ public class Batch {
     return destinations;
   }
 
-  public Destination getDestination(Branch.NameKey branch) {
+  public Destination getDestination(BranchNameKey branch) {
     if (destinations == null) {
       destinations = new ArrayList<>();
     }
     Destination dest = getExistingDestination(branch);
     if (dest == null) {
       dest = new Destination();
-      dest.project = branch.getParentKey().get();
-      dest.ref = branch.get();
+      dest.project = branch.project().get();
+      dest.ref = branch.branch();
       destinations.add(dest);
     }
     return dest;
   }
 
-  protected Destination getExistingDestination(Branch.NameKey branch) {
+  protected Destination getExistingDestination(BranchNameKey branch) {
     if (destinations == null) {
       destinations = new ArrayList<>();
     }
     for (Destination dest : destinations) {
-      if (dest.project.equals(branch.getParentKey().get()) && dest.ref.equals(branch.get())) {
+      if (dest.project.equals(branch.project().get()) && dest.ref.equals(branch.branch())) {
         return dest;
       }
     }

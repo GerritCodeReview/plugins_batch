@@ -20,6 +20,7 @@ import com.google.gerrit.sshd.CommandMetaData;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.batch.ListBatches;
 import org.apache.sshd.server.Environment;
+import org.apache.sshd.server.channel.ChannelSession;
 
 @CommandMetaData(name = "ls-batches", description = "List batches visible to caller")
 public class ListCommand extends BaseCommand {
@@ -31,7 +32,7 @@ public class ListCommand extends BaseCommand {
   }
 
   @Override
-  public void start(final Environment env) {
+  public void start(ChannelSession arg0, final Environment env) {
     startThread(
         new CommandRunnable() {
           @Override

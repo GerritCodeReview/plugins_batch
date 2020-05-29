@@ -14,10 +14,10 @@
 package com.googlesource.gerrit.plugins.batch.ssh;
 
 import com.google.gerrit.json.OutputFormat;
-import com.google.gerrit.reviewdb.client.Branch;
-import com.google.gerrit.reviewdb.client.Change;
-import com.google.gerrit.reviewdb.client.PatchSet;
-import com.google.gerrit.reviewdb.client.Project;
+import com.google.gerrit.entities.Change;
+import com.google.gerrit.entities.PatchSet;
+import com.google.gerrit.entities.BranchNameKey;
+import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.project.NoSuchRefException;
 import com.google.gerrit.sshd.CommandMetaData;
@@ -77,7 +77,7 @@ public class MergeChangeCommand extends SshCommand {
   protected void addPatchSetId(final String token) {
     PatchSetArgument psa = patchSetArgumentFactory.createForArgument(token);
     psa.ensureLatest();
-    patchSetArgumentsByPatchSet.put(psa.patchSet.getId(), psa);
+    patchSetArgumentsByPatchSet.put(psa.patchSet.id(), psa);
   }
 
   @Inject protected PatchSetArgument.Factory patchSetArgumentFactory;
@@ -130,7 +130,7 @@ public class MergeChangeCommand extends SshCommand {
       return true;
     }
     for (ObjectId parent : parents) {
-      Project.NameKey project = psarg.change.getDest().getParentKey();
+      Project.NameKey project = psarg.change.getDest().project();
       if (isMergedInto(project, parent, sha1)) {
         return true;
       }
@@ -146,10 +146,10 @@ public class MergeChangeCommand extends SshCommand {
     }
   }
 
-  protected ObjectId getTip(Branch.NameKey branch)
+  protected ObjectId getTip(BranchNameKey branch)
       throws IOException, NoSuchRefException, RepositoryNotFoundException {
-    try (Repository repo = repoManager.openRepository(branch.getParentKey())) {
-      Ref ref = repo.getRefDatabase().exactRef(branch.get());
+    try (Repository repo = repoManager.openRepository(branch.project())) {
+      Ref ref = repo.getRefDatabase().exactRef(branch.branch());
       if (ref == null) {
         throw new NoSuchRefException(branch.toString());
       }
@@ -159,20 +159,20 @@ public class MergeChangeCommand extends SshCommand {
 
   protected void merge(Batch batch, Change change, PatchSet ps)
       throws Exception, IOException, NoSuchRefException, UnloggedFailure {
-    Branch.NameKey branch = change.getDest();
+    BranchNameKey branch = change.getDest();
     Batch.Destination dest = batch.getDestination(branch);
     dest.sha1 =
         mergeBranchFactory
             .create(
                 branch,
                 dest.sha1,
-                ps.getRefName(),
+                ps.refName(),
                 strategy.getMergeStrategy(),
                 fastForward.getFastForwardMode(),
                 message)
             .call()
             .getName();
-    dest.add(ps.getId());
+    dest.add(ps.id());
   }
 
   /* A Resolver which ensures that changes are eligible to merge before
@@ -197,12 +197,12 @@ public class MergeChangeCommand extends SshCommand {
       List<PatchSetArgument> remaining = new ArrayList<>();
       Set<ObjectId> sources = new HashSet<>();
 
-      Destination(Branch.NameKey branch) throws IOException, NoSuchRefException {
+      Destination(BranchNameKey branch) throws IOException, NoSuchRefException {
         sources.add(getTip(branch));
       }
     }
 
-    protected Map<Branch.NameKey, Destination> destinationsByBranches = new HashMap<>();
+    protected Map<BranchNameKey, Destination> destinationsByBranches = new HashMap<>();
     protected List<PatchSetArgument> resolved = new ArrayList<>();
 
     protected Resolver(Iterable<PatchSetArgument> psargs)
@@ -236,7 +236,7 @@ public class MergeChangeCommand extends SshCommand {
         if (isParentMergedInto(psarg, dest.sources)) {
           found = true;
           resolved.add(psarg);
-          dest.sources.add(ObjectId.fromString(psarg.patchSet.getRevision().get()));
+          dest.sources.add(psarg.patchSet.commitId());
         }
       }
       dest.remaining.removeAll(resolved);
@@ -250,12 +250,12 @@ public class MergeChangeCommand extends SshCommand {
     }
 
     protected void add(PatchSetArgument psarg) throws IOException, NoSuchRefException {
-      Branch.NameKey branch = psarg.change.getDest();
+      BranchNameKey branch = psarg.change.getDest();
       Destination dest = getDestination(branch);
       dest.remaining.add(psarg);
     }
 
-    protected Destination getDestination(Branch.NameKey b) throws IOException, NoSuchRefException {
+    protected Destination getDestination(BranchNameKey b) throws IOException, NoSuchRefException {
       Destination dest = destinationsByBranches.get(b);
       if (dest == null) {
         dest = new Destination(b);
@@ -266,7 +266,7 @@ public class MergeChangeCommand extends SshCommand {
   }
 
   protected List<ObjectId> getParents(PatchSetArgument psarg) throws IOException {
-    PatchSet.Id id = psarg.patchSet.getId();
+    PatchSet.Id id = psarg.patchSet.id();
     List<ObjectId> parents = parentsByPsarg.get(id);
     if (parents == null) {
       parents = loadParents(psarg);
@@ -279,7 +279,7 @@ public class MergeChangeCommand extends SshCommand {
     try (Repository repo = repoManager.openRepository(psarg.change.getProject());
         RevWalk revWalk = new RevWalk(repo)) {
       List<ObjectId> parents = new ArrayList<>();
-      ObjectId id = ObjectId.fromString(psarg.patchSet.getRevision().get());
+      ObjectId id = psarg.patchSet.commitId();
       RevCommit c = revWalk.parseCommit(id);
       for (RevCommit parent : c.getParents()) {
         parents.add(parent);

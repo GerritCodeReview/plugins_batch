@@ -15,10 +15,10 @@ package com.googlesource.gerrit.plugins.batch.util;
 
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.extensions.restapi.BadRequestException;
-import com.google.gerrit.reviewdb.client.BooleanProjectConfig;
-import com.google.gerrit.reviewdb.client.Branch;
-import com.google.gerrit.reviewdb.client.Project;
-import com.google.gerrit.reviewdb.client.RefNames;
+import com.google.gerrit.entities.BooleanProjectConfig;
+import com.google.gerrit.entities.BranchNameKey;
+import com.google.gerrit.entities.Project;
+import com.google.gerrit.entities.RefNames;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.project.NoSuchRefException;
 import com.google.gerrit.server.project.ProjectCache;
@@ -38,7 +38,7 @@ import org.eclipse.jgit.merge.MergeStrategy;
 public class MergeBranch implements Callable<ObjectId> {
   public interface Factory {
     MergeBranch create(
-        @Assisted Branch.NameKey destBranch,
+        @Assisted BranchNameKey destBranch,
         @Assisted("destSha") @Nullable String destSha,
         @Assisted("sourceRef") String srcName,
         @Assisted MergeStrategy strategy,
@@ -62,7 +62,7 @@ public class MergeBranch implements Callable<ObjectId> {
       GitRepositoryManager repoManager,
       ProjectCache projectCache,
       MergeBuilder.Factory builderFactory,
-      @Assisted Branch.NameKey destBranch,
+      @Assisted BranchNameKey destBranch,
       @Assisted("destSha") @Nullable String destSha,
       @Assisted("sourceRef") String srcName,
       @Assisted("message") @Nullable String message,
@@ -71,8 +71,8 @@ public class MergeBranch implements Callable<ObjectId> {
     this.projectCache = projectCache;
     this.repoManager = repoManager;
     this.builderFactory = builderFactory;
-    this.projectName = destBranch.getParentKey();
-    destName = RefNames.fullName(destBranch.get());
+    this.projectName = destBranch.project();
+    destName = RefNames.fullName(destBranch.branch());
     if (destSha != null) {
       this.destId = ObjectId.fromString(destSha);
     }

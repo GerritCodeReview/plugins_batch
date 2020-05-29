@@ -13,9 +13,9 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.batch;
 
-import com.google.gerrit.reviewdb.client.Branch;
 import com.google.gerrit.reviewdb.client.File;
-import com.google.gerrit.reviewdb.client.Project;
+import com.google.gerrit.entities.BranchNameKey;
+import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.config.AllProjectsName;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.meta.GitFile;
@@ -110,11 +110,11 @@ public class BatchStore {
     return getFileNameKey(getBranch(id));
   }
 
-  protected Branch.NameKey getBranch(String id) {
-    return new Branch.NameKey(project, BATCHES_REF + id);
+  protected BranchNameKey getBranch(String id) {
+    return BranchNameKey.create(project, BATCHES_REF + id);
   }
 
-  protected File.NameKey getFileNameKey(Branch.NameKey branch) {
+  protected File.NameKey getFileNameKey(BranchNameKey branch) {
     return new File.NameKey(branch, FILE_NAME);
   }
 }
