@@ -45,9 +45,7 @@ import org.eclipse.jgit.errors.RepositoryNotFoundException;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.ObjectInserter;
 import org.eclipse.jgit.lib.ObjectReader;
-import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
 
 public class BatchSubmitter {
@@ -170,8 +168,6 @@ public class BatchSubmitter {
         ObjectInserter ins = repo.newObjectInserter();
         ObjectReader reader = ins.newReader();
         RevWalk walk = new RevWalk(reader)) {
-      Ref destRef = repo.getRefDatabase().exactRef(destination.get());
-      RevCommit newTip = walk.parseCommit(destRef.getObjectId());
       bu.setRepository(repo, walk, ins);
       bu.setRefLogMessage("merged (batch submit)");
       bu.addOp(
