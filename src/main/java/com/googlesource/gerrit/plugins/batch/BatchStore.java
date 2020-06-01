@@ -15,7 +15,7 @@ package com.googlesource.gerrit.plugins.batch;
 
 import com.google.gerrit.entities.Account;
 import com.google.gerrit.entities.BranchNameKey;
-import com.google.gerrit.entities.File;
+import com.google.gerrit.entities.FileNameKey;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.config.AllProjectsName;
 import com.google.gerrit.server.git.GitRepositoryManager;
@@ -137,7 +137,7 @@ public class BatchStore {
     throw new NoSuchBatchException(id);
   }
 
-  protected File.NameKey getFileNameKey(String id) {
+  protected FileNameKey getFileNameKey(String id) {
     return getFileNameKey(getBranch(id));
   }
 
@@ -145,7 +145,7 @@ public class BatchStore {
     return BranchNameKey.create(project, BATCHES_REF + id);
   }
 
-  protected File.NameKey getFileNameKey(BranchNameKey branch) {
-    return new File.NameKey(branch, FILE_NAME);
+  protected FileNameKey getFileNameKey(BranchNameKey branch) {
+    return FileNameKey.create(branch, FILE_NAME);
   }
 }

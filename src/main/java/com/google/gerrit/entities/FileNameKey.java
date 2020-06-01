@@ -14,35 +14,26 @@
 
 package com.google.gerrit.entities;
 
+import com.google.auto.value.AutoValue;
 import com.google.gerrit.entities.BranchNameKey;
 import com.google.gerrit.entities.Project;
 
-public class File {
-  /** An immutable reference to a file in gerrit repo. */
-  public static class NameKey implements Comparable<NameKey> {
-    protected BranchNameKey branch;
-    protected String fileName;
+/** An immutable reference to a file in gerrit repo. */
+@AutoValue
+public abstract class FileNameKey implements Comparable<FileNameKey> {
+  public static FileNameKey create(BranchNameKey branch, String file) {
+    return new AutoValue_FileNameKey(branch, file);
+  }
 
-    protected NameKey() {
-      branch = BranchNameKey.create(Project.nameKey(null), null);
-    }
+  public static FileNameKey create() {
+    return new AutoValue_FileNameKey(BranchNameKey.create(Project.nameKey(null), null), null);
+  }
 
-    public NameKey(BranchNameKey br, String file) {
-      branch = br;
-      fileName = file;
-    }
+  public abstract BranchNameKey branch();
+  public abstract String file();
 
-    public String get() {
-      return fileName;
-    }
-
-    public BranchNameKey getParentKey() {
-      return branch;
-    }
-
-    @Override
-    public final int compareTo(NameKey o) {
-      return get().compareTo(o.get());
-    }
+  @Override
+  public final int compareTo(FileNameKey o) {
+    return file().compareTo(o.file());
   }
 }

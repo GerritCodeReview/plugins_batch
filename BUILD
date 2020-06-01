@@ -5,6 +5,46 @@ load(
     "gerrit_plugin",
 )
 
+load("@rules_java//java:defs.bzl", "java_library", "java_plugin")
+
+java_plugin(
+    name = "auto-annotation-plugin",
+    processor_class = "com.google.auto.value.processor.AutoAnnotationProcessor",
+    deps = [
+        "@auto-value-annotations//jar",
+        "@auto-value//jar",
+    ],
+)
+
+java_plugin(
+    name = "auto-value-plugin",
+    processor_class = "com.google.auto.value.processor.AutoValueProcessor",
+    deps = [
+        "@auto-value-annotations//jar",
+        "@auto-value//jar",
+    ],
+)
+
+java_library(
+    name = "auto-value",
+    exported_plugins = [
+        ":auto-annotation-plugin",
+        ":auto-value-plugin",
+    ],
+    visibility = ["//visibility:public"],
+    exports = ["@auto-value//jar"],
+)
+
+java_library(
+    name = "auto-value-annotations",
+    exported_plugins = [
+        ":auto-annotation-plugin",
+        ":auto-value-plugin",
+    ],
+    visibility = ["//visibility:public"],
+    exports = ["@auto-value-annotations//jar"],
+)
+
 gerrit_plugin(
     name = "batch",
     srcs = glob(["src/main/java/**/*.java"]),
@@ -17,4 +57,8 @@ gerrit_plugin(
         "Gerrit-SshModule: com.googlesource.gerrit.plugins.batch.ssh.SshModule",
     ],
     resources = glob(["src/main/resources/**/*"]),
+    deps = [
+        ":auto-value",
+        ":auto-value-annotations"
+    ],
 )
