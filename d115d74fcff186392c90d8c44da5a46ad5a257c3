@@ -16,6 +16,24 @@
       "revId": "d115d74fcff186392c90d8c44da5a46ad5a257c3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7666d9b2_f7aaa26f",
+        "filename": "pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-06-01T16:52:38Z",
+      "side": 1,
+      "message": "I\u0027d prefer to keep it. It\u0027s handy to use when bazel is being frustrating. It\u0027s ok if it gets out of sync with bazel unless you need to make code changes too. I think it\u0027s fine to show/have a plugin built against an earlier patch release running and passing tests on a later patch release.",
+      "parentUuid": "ef0b71dc_fc54b349",
+      "revId": "d115d74fcff186392c90d8c44da5a46ad5a257c3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
