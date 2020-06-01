@@ -19,6 +19,7 @@ import com.google.gerrit.entities.BranchNameKey;
 import com.google.gerrit.entities.Change;
 import com.google.gerrit.entities.PatchSet;
 import com.google.gerrit.entities.Project;
+import com.google.gerrit.entities.SubmissionId;
 import com.google.gerrit.extensions.restapi.AuthException;
 import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.gerrit.server.IdentifiedUser;
@@ -135,13 +136,17 @@ public class BatchSubmitter {
       throws IOException, RepositoryNotFoundException, RestApiException, UpdateException,
           PermissionBackendException {
     if (dest.changes != null) {
+      // TODO: Is using the first change in the batch for each dest the correct thing to do?
+      Change firstInDest =
+          notesFactory.createChecked(dest.changes.get(0).toPatchSetId().changeId()).getChange();
+      SubmissionId submissionId = new SubmissionId(firstInDest);
       for (Batch.Change change : dest.changes) {
-        closeChange(change.toPatchSetId(), dest.sha1);
+        closeChange(change.toPatchSetId(), dest.sha1, submissionId);
       }
     }
   }
 
-  private void closeChange(PatchSet.Id psId, String sha1)
+  private void closeChange(PatchSet.Id psId, String sha1, SubmissionId submissionId)
       throws IOException, RepositoryNotFoundException, RestApiException, UpdateException,
           PermissionBackendException {
     ChangeNotes changeNotes = notesFactory.createChecked(psId.changeId());
@@ -172,7 +177,8 @@ public class BatchSubmitter {
       bu.setRefLogMessage("merged (batch submit)");
       bu.addOp(
           psId.changeId(),
-          mergedByPushOpFactory.create(requestScopePropagator, psId, destination.branch(), sha1));
+          mergedByPushOpFactory.create(
+              requestScopePropagator, psId, submissionId, destination.branch(), sha1));
       bu.execute();
     }
   }

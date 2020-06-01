@@ -15,10 +15,10 @@ package com.googlesource.gerrit.plugins.batch.util;
 
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.Project;
+import com.google.gerrit.extensions.restapi.MergeConflictException;
 import com.google.gerrit.server.GerritPersonIdent;
 import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.git.GitRepositoryManager;
-import com.google.gerrit.server.submit.IntegrationException;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import java.io.IOException;
@@ -121,13 +121,13 @@ public class MergeBuilder implements Callable<ObjectId> {
   }
 
   @Override
-  public ObjectId call() throws IOException, IntegrationException {
+  public ObjectId call() throws IOException, MergeConflictException {
     try (Repository repo = repoManager.openRepository(project)) {
       return build(repo);
     }
   }
 
-  public ObjectId build(Repository repo) throws IOException, IntegrationException {
+  public ObjectId build(Repository repo) throws IOException, MergeConflictException {
     try (RevWalk revWalk = new RevWalk(repo)) {
       RevCommit firstParentCommit = revWalk.lookupCommit(firstParent);
       RevCommit secondParentCommit = revWalk.lookupCommit(secondParent);
@@ -139,17 +139,17 @@ public class MergeBuilder implements Callable<ObjectId> {
         return secondParent; // Fast forward merge
       }
       if (fastForwardMode == FastForwardMode.FF_ONLY) {
-        throw new IntegrationException("Merge aborted"); // because not FF
+        throw new MergeConflictException("Merge aborted"); // because not FF
       }
       return merge(repo, revWalk);
     }
   }
 
   protected ObjectId merge(Repository repo, RevWalk revWalk)
-      throws IOException, IntegrationException {
+      throws IOException, MergeConflictException {
     ThreeWayMerger merger = getMerger(repo);
     if (!merger.merge(firstParent, secondParent)) {
-      throw new IntegrationException("Merge conflict");
+      throw new MergeConflictException("Merge conflict");
     }
     message = defaultMessage(revWalk, message);
     return insert(merger, buildCommit(merger));
