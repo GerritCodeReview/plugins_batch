@@ -15,7 +15,7 @@
 package com.google.gerrit.server.git.meta;
 
 import com.google.gerrit.entities.BranchNameKey;
-import com.google.gerrit.entities.File;
+import com.google.gerrit.entities.FileNameKey;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.project.NoSuchProjectException;
@@ -31,7 +31,7 @@ import org.eclipse.jgit.revwalk.RevCommit;
 /** A GitFile is a text file (UTF8) from a git repository */
 public class GitFile extends VersionedMetaData {
   public interface Factory {
-    GitFile create(@Assisted File.NameKey file);
+    GitFile create(@Assisted FileNameKey file);
   }
 
   protected final MetaDataUpdate.User metaDataUpdateFactory;
@@ -46,11 +46,11 @@ public class GitFile extends VersionedMetaData {
   public GitFile(
       MetaDataUpdate.User metaDataUpdateFactory,
       GitRepositoryManager repos,
-      @Assisted File.NameKey file) {
+      @Assisted FileNameKey file) {
     this.metaDataUpdateFactory = metaDataUpdateFactory;
     this.repos = repos;
-    this.branch = file.getParentKey();
-    this.file = file.get();
+    this.branch = file.branch();
+    this.file = file.file();
   }
 
   public String read() throws ConfigInvalidException, IOException, NoSuchProjectException {
