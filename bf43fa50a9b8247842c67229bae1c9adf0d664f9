@@ -52,6 +52,24 @@
       "revId": "bf43fa50a9b8247842c67229bae1c9adf0d664f9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b678bdd6_3c020e26",
+        "filename": "WORKSPACE",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-06-09T20:43:22Z",
+      "side": 1,
+      "message": "Oops, yeah, 2756d53 should have been 81e56222d9cec5fc46b9a60d1948833406afda56.",
+      "parentUuid": "6aaf211f_bfd1d251",
+      "revId": "bf43fa50a9b8247842c67229bae1c9adf0d664f9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
