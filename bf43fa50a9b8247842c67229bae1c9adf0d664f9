@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ae5a0d1_0c8921b8",
+        "filename": "WORKSPACE",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-06-09T20:12:01Z",
+      "side": 1,
+      "message": "I think this is for 3.1.6? It should be left the same as before (3.2.0). A new change can update it to 3.2.1.",
+      "revId": "bf43fa50a9b8247842c67229bae1c9adf0d664f9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
