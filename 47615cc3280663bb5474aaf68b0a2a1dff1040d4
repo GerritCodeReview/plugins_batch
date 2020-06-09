@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "380e2cb2_3724df6e",
+        "filename": "WORKSPACE",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-06-09T01:05:39Z",
+      "side": 1,
+      "message": "It shouldn\u0027t be necessary to add these here.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 0
+      },
+      "revId": "47615cc3280663bb5474aaf68b0a2a1dff1040d4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
