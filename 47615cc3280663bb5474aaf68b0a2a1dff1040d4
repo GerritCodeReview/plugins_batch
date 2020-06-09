@@ -22,6 +22,30 @@
       "revId": "47615cc3280663bb5474aaf68b0a2a1dff1040d4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e895fa73_a46e480d",
+        "filename": "WORKSPACE",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-06-09T18:02:13Z",
+      "side": 1,
+      "message": "Looks like you fixed in https://gerrit-review.googlesource.com/c/plugins/batch/+/270880. Thanks!",
+      "parentUuid": "380e2cb2_3724df6e",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 0
+      },
+      "revId": "47615cc3280663bb5474aaf68b0a2a1dff1040d4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
