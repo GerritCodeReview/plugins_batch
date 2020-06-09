@@ -3,7 +3,7 @@ workspace(name = "batch")
 load("//:bazlets.bzl", "load_bazlets")
 
 load_bazlets(
-    commit = "2756d53cdd3fff3af738df3c46c90625e05c3681",
+    commit = "69ae6ee516ec1cc51d0a07fe4419a325eb9063ce",
     #local_path = "/home/<user>/projects/bazlets",
 )
 
@@ -22,21 +22,9 @@ load(
 # Load release Plugin API
 gerrit_api()
 
-load("//tools/bzl:maven_jar.bzl", "GERRIT", "maven_jar")
+load("//:external_plugin_deps.bzl", "external_plugin_deps")
 
-AUTO_VALUE_VERSION = "1.7"
-
-maven_jar(
-    name = "auto-value",
-    artifact = "com.google.auto.value:auto-value:" + AUTO_VALUE_VERSION,
-    sha1 = "fe8387764ed19460eda4f106849c664f51c07121",
-)
-
-maven_jar(
-    name = "auto-value-annotations",
-    artifact = "com.google.auto.value:auto-value-annotations:" + AUTO_VALUE_VERSION,
-    sha1 = "5be124948ebdc7807df68207f35a0f23ce427f29",
-)
+external_plugin_deps()
 
 # Load snapshot Plugin API
 #gerrit_api_maven_local()
