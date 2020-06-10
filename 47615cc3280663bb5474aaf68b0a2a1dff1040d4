@@ -70,6 +70,30 @@
       "revId": "47615cc3280663bb5474aaf68b0a2a1dff1040d4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6dfe36_eff30a8c",
+        "filename": "WORKSPACE",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-06-10T15:53:04Z",
+      "side": 1,
+      "message": "Oh I see. I tried that first, but I don\u0027t think it\u0027s exported by core in the API. It probably works for in-tree builds, but didn\u0027t work out of tree.",
+      "parentUuid": "8f3c79ac_8b580595",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 0
+      },
+      "revId": "47615cc3280663bb5474aaf68b0a2a1dff1040d4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
