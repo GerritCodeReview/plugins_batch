@@ -50,7 +50,7 @@ gerrit_plugin(
     srcs = glob(["src/main/java/**/*.java"]),
     manifest_entries = [
         "Gerrit-PluginName: batch",
-        "Gerrit-ApiVersion: 3.0.0",
+        "Gerrit-ApiVersion: 3.3.0-SNAPSHOT",
         "Implementation-Title: Batch Plugin",
         "Implementation-URL: https://gerrit-review.googlesource.com/#/admin/projects/plugins/batch",
         "Gerrit-Module: com.googlesource.gerrit.plugins.batch.Module",

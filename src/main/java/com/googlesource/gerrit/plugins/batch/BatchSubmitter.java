@@ -177,8 +177,7 @@ public class BatchSubmitter {
       bu.setRefLogMessage("merged (batch submit)");
       bu.addOp(
           psId.changeId(),
-          mergedByPushOpFactory.create(
-              requestScopePropagator, psId, submissionId, destination.branch(), sha1));
+          mergedByPushOpFactory.create(psId, submissionId, destination.branch(), sha1));
       bu.execute();
     }
   }
