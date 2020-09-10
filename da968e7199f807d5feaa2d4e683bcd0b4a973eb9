@@ -16,6 +16,24 @@
       "revId": "da968e7199f807d5feaa2d4e683bcd0b4a973eb9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "859fa57e_13e5f86b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-09-10T21:51:57Z",
+      "side": 1,
+      "message": "Created the branch and uploaded a merge for it:  https://gerrit-review.googlesource.com/c/plugins/batch/+/281236",
+      "parentUuid": "fcbb3092_ab9ec1cc",
+      "revId": "da968e7199f807d5feaa2d4e683bcd0b4a973eb9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
