@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79b23960_77bd0b46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-23T14:36:40Z",
+      "side": 1,
+      "message": "Does this work without 285419: Update Gerrit API to 3.0.13 | https://gerrit-review.googlesource.com/c/bazlets/+/285419 merged? I was waiting until that merged to test this.",
+      "revId": "a6f6a2135724a101833e4ae356e887bc6ab59703",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
