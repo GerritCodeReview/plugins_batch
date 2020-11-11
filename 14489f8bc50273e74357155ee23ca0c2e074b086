@@ -16,6 +16,24 @@
       "message": "Plugin fails to build locally because of a now missing RequestScopePropagator parameter in this create method call [1]. I currently cannot focus on fixing this properly for that plugin. Can you or Martin (or someone from your team) do it? You (or I) can update this change accordingly to your plans.\n\n[1] https://gerrit.googlesource.com/plugins/batch/+/refs/heads/master/src/main/java/com/googlesource/gerrit/plugins/batch/BatchSubmitter.java#180",
       "revId": "14489f8bc50273e74357155ee23ca0c2e074b086",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a921ca5d_5b7a8800",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-11-11T22:16:13Z",
+      "side": 1,
+      "message": "Yep. I\u0027ll take a look. Thanks for building locally and finding the issue!",
+      "parentUuid": "e6ae4eba_a887aa9e",
+      "revId": "14489f8bc50273e74357155ee23ca0c2e074b086",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
