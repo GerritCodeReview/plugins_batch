@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f47e654_7fb6f4eb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/batch/BatchSubmitter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-11-11T23:50:16Z",
+      "side": 1,
+      "message": "@Kaushik, did you run gjf on this?",
+      "revId": "bfc85c2bef889ed628a84aee3995e10477e7779f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
