@@ -34,6 +34,24 @@
       "parentUuid": "e6ae4eba_a887aa9e",
       "revId": "14489f8bc50273e74357155ee23ca0c2e074b086",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0737e9b_197769d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-11-12T00:27:00Z",
+      "side": 1,
+      "message": "Actually, PS1 builds fine for me out of tree. Are you building in tree? I\u0027d prefer to fix a \"doesn\u0027t work with latest tip\" error in a change that bumps the Gerrit API on master branch. Does that make sense to you?",
+      "parentUuid": "a921ca5d_5b7a8800",
+      "revId": "14489f8bc50273e74357155ee23ca0c2e074b086",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
