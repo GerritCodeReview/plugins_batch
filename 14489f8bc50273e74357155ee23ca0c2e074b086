@@ -70,6 +70,24 @@
       "parentUuid": "b0737e9b_197769d3",
       "revId": "14489f8bc50273e74357155ee23ca0c2e074b086",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d25262ab_af0e6bac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-11-12T15:04:59Z",
+      "side": 1,
+      "message": "Yeah, thanks. I think I need to create a stable-3.3 branch for batch. I\u0027ll do that today and get the merge right 😊",
+      "parentUuid": "564a9049_9a1d10f2",
+      "revId": "14489f8bc50273e74357155ee23ca0c2e074b086",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
