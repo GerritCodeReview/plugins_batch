@@ -52,6 +52,24 @@
       "parentUuid": "a921ca5d_5b7a8800",
       "revId": "14489f8bc50273e74357155ee23ca0c2e074b086",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "564a9049_9a1d10f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-11-12T14:23:00Z",
+      "side": 1,
+      "message": "I was trying with both in-tree and standalone bazel modes, IIRC. I forgot which one(s) had the build failure. -Letting you and Kaushik figure this all out for good. You may amend or dispose of this change at will. Thanks again :)",
+      "parentUuid": "b0737e9b_197769d3",
+      "revId": "14489f8bc50273e74357155ee23ca0c2e074b086",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
