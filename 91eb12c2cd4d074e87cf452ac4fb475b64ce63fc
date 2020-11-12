@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77e1fd3c_e01d5fe9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-11-12T04:39:56Z",
+      "side": 1,
+      "message": "Needs WORKSPACE update to 3.4.0-SNAPSHOT",
+      "revId": "91eb12c2cd4d074e87cf452ac4fb475b64ce63fc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
