@@ -22,6 +22,30 @@
       },
       "revId": "1f63c1c0d55eb893a3a527d3861c7ae0173a82b0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53b25266_21b71bc6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/batch/ssh/ListCommand.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-11-13T18:04:33Z",
+      "side": 1,
+      "message": "I see it\u0027s just this one. So maybe compare it to ls-project.",
+      "parentUuid": "ee181201_062f9740",
+      "range": {
+        "startLine": 27,
+        "startChar": 33,
+        "endLine": 27,
+        "endChar": 45
+      },
+      "revId": "1f63c1c0d55eb893a3a527d3861c7ae0173a82b0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
