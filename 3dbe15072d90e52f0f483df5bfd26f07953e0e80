@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e402f542_b98bf221",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-11-13T00:20:15Z",
+      "side": 1,
+      "message": "Zuul build failure is real since I84670dcabf9f3638185563c7ff92201e7489601a merged in core. Will fix.",
+      "revId": "3dbe15072d90e52f0f483df5bfd26f07953e0e80",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
