@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abf8f4c4_dd731144",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/batch/ssh/MergeChangeCommand.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1096442
+      },
+      "writtenOn": "2020-11-13T18:24:44Z",
+      "side": 0,
+      "message": "removing from here as the start() from SshCommand already does the parsing... do you think there is any other reason to do the parsing twice..?",
+      "range": {
+        "startLine": 91,
+        "startChar": 4,
+        "endLine": 91,
+        "endChar": 20
+      },
+      "revId": "91eb12c2cd4d074e87cf452ac4fb475b64ce63fc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
