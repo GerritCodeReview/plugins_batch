@@ -16,7 +16,7 @@ load(
 #gerrit_api()
 
 # Load snapshot Plugin API
-gerrit_api(version = "3.3.0-SNAPSHOT")
+gerrit_api(version = "3.4.0-SNAPSHOT")
 
 load("//:external_plugin_deps.bzl", "external_plugin_deps")
 
