@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ee256d2f_d8e11d53",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-11-13T18:06:42Z",
+      "side": 1,
+      "message": "I think it helps to explain the core changes that broke this.",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 11
+      },
+      "revId": "1f63c1c0d55eb893a3a527d3861c7ae0173a82b0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ee181201_062f9740",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/batch/ssh/ListCommand.java",
         "patchSetId": 1
