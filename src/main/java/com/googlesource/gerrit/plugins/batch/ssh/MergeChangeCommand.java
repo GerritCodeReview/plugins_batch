@@ -88,7 +88,6 @@ public class MergeChangeCommand extends SshCommand {
 
   @Override
   public void run() throws Exception {
-    parseCommandLine();
     Batch batch = new Batch(user.getAccountId());
     String err = null;
     try {

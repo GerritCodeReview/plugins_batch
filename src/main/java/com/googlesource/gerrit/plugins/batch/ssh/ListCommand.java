@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.batch.ssh;
 
 import com.google.gerrit.server.AccessPath;
+import com.google.gerrit.server.DynamicOptions;
 import com.google.gerrit.sshd.BaseCommand;
 import com.google.gerrit.sshd.CommandMetaData;
 import com.google.inject.Inject;
@@ -37,8 +38,11 @@ public class ListCommand extends BaseCommand {
         new CommandRunnable() {
           @Override
           public void run() throws Exception {
-            parseCommandLine(impl);
-            impl.display(out);
+            try (DynamicOptions pluginOptions =
+                new DynamicOptions(ListCommand.this, injector, dynamicBeans)) {
+              parseCommandLine(impl, pluginOptions);
+              impl.display(out);
+            }
           }
         },
         AccessPath.SSH_COMMAND);

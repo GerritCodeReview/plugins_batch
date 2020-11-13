@@ -39,7 +39,6 @@ public class SubmitCommand extends SshCommand {
 
   @Override
   public void run() throws Exception {
-    parseCommandLine();
     try {
       Batch batch = impl.submit(batchId);
       out.write((OutputFormat.JSON.newGson().toJson(batch) + "\n").getBytes(ENC));
