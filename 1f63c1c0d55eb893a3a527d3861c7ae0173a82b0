@@ -117,6 +117,30 @@
       },
       "revId": "1f63c1c0d55eb893a3a527d3861c7ae0173a82b0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d900b08_ae049252",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/batch/ssh/ListCommand.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1096442
+      },
+      "writtenOn": "2020-11-13T19:08:48Z",
+      "side": 1,
+      "message": "I tried to understand and compare with ls-projects which has similar use-case and it (options from impl) was able to work without doing  parseCommandLine(impl)... for now not sure why we can\u0027t extend SshCommand in ls-batches.. I need to dig deeper and debug the use-cases...\n\ncan we look at this as a separate problem and tackle it separately and for now unblock the CI..?",
+      "parentUuid": "012a907e_8d41e505",
+      "range": {
+        "startLine": 27,
+        "startChar": 33,
+        "endLine": 27,
+        "endChar": 45
+      },
+      "revId": "1f63c1c0d55eb893a3a527d3861c7ae0173a82b0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
