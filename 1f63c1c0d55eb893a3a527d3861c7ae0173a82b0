@@ -69,6 +69,30 @@
       },
       "revId": "1f63c1c0d55eb893a3a527d3861c7ae0173a82b0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "012a907e_8d41e505",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/batch/ssh/ListCommand.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-11-13T18:47:34Z",
+      "side": 1,
+      "message": "SshCommand does its own command line parsing, so I don\u0027t think there\u0027s a way to share options with a REST command like we do here. SshCommand would need to know to parse options from ListBatches, not this ListCommand class. Maybe you could solve that by making ListBatches extend SshCommand?",
+      "parentUuid": "53b25266_21b71bc6",
+      "range": {
+        "startLine": 27,
+        "startChar": 33,
+        "endLine": 27,
+        "endChar": 45
+      },
+      "revId": "1f63c1c0d55eb893a3a527d3861c7ae0173a82b0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
