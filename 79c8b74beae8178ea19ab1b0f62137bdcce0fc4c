@@ -16,6 +16,41 @@
       "message": "Should this also be updating the snapshot sha1?",
       "revId": "79c8b74beae8178ea19ab1b0f62137bdcce0fc4c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2f5c87e_d38ea1e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096442
+      },
+      "writtenOn": "2020-11-26T16:23:49Z",
+      "side": 1,
+      "message": "I believe we no need to update sha1... saw the commits made by Nasser and found none with sha1 update.. Kindly let me know if I\u0027m missing something.",
+      "parentUuid": "dca55dd4_228d5a20",
+      "revId": "79c8b74beae8178ea19ab1b0f62137bdcce0fc4c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84b9f48b_83ff9919",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096442
+      },
+      "writtenOn": "2020-11-26T16:23:49Z",
+      "side": 1,
+      "message": "I saw Zuul is failing with different problem... which is cause by removing method createChecked(changeId) from ChangeNotes.java. Due to this change, https://gerrit-review.googlesource.com/c/gerrit/+/288345\n\nplugins/batch/src/main/java/com/googlesource/gerrit/plugins/batch/BatchSubmitter.java:141: error: incompatible types: Id cannot be converted to Change\n          notesFactory.createChecked(dest.changes.get(0).toPatchSetId().changeId()).getChange();\n                                                                                ^\nplugins/batch/src/main/java/com/googlesource/gerrit/plugins/batch/BatchSubmitter.java:152: error: incompatible types: Id cannot be converted to Change\n    ChangeNotes changeNotes \u003d notesFactory.createChecked(psId.changeId());\n                                                                      ^\nplugins/batch/src/main/java/com/googlesource/gerrit/plugins/batch/cli/PatchSetArgument.java:50: error: incompatible types: Id cannot be converted to Change\n        ChangeNotes changeNotes \u003d notesFactory.createChecked(patchSetId.changeId());\n                                                                                ^\nTarget //plugins/batch:batch failed to build\nINFO: Elapsed time: 16.650s, Critical Path: 16.23s\nINFO: 34 processes: 2 internal, 32 darwin-sandbox.\nFAILED: Build did NOT complete successfully",
+      "revId": "79c8b74beae8178ea19ab1b0f62137bdcce0fc4c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
