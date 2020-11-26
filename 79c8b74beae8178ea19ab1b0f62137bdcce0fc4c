@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dca55dd4_228d5a20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-11-26T04:24:42Z",
+      "side": 1,
+      "message": "Should this also be updating the snapshot sha1?",
+      "revId": "79c8b74beae8178ea19ab1b0f62137bdcce0fc4c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
