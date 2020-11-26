@@ -47,7 +47,7 @@ public class PatchSetArgument {
     public PatchSetArgument createForArgument(String token) {
       try {
         PatchSet.Id patchSetId = parsePatchSet(token);
-        ChangeNotes changeNotes = notesFactory.createChecked(patchSetId.changeId());
+        ChangeNotes changeNotes = notesFactory.createCheckedUsingIndexLookup(patchSetId.changeId());
         permissionBackend.user(user).change(changeNotes).check(ChangePermission.READ);
         return new PatchSetArgument(changeNotes.getChange(), psUtil.get(changeNotes, patchSetId));
       } catch (PermissionBackendException | AuthException e) {
