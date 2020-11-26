@@ -138,18 +138,22 @@ public class BatchSubmitter {
     if (dest.changes != null) {
       // TODO: Is using the first change in the batch for each dest the correct thing to do?
       Change firstInDest =
-          notesFactory.createChecked(dest.changes.get(0).toPatchSetId().changeId()).getChange();
+          notesFactory
+              .createChecked(
+                  Project.nameKey(dest.project), dest.changes.get(0).toPatchSetId().changeId())
+              .getChange();
       SubmissionId submissionId = new SubmissionId(firstInDest);
       for (Batch.Change change : dest.changes) {
-        closeChange(change.toPatchSetId(), dest.sha1, submissionId);
+        closeChange(change.toPatchSetId(), dest.sha1, Project.nameKey(dest.project), submissionId);
       }
     }
   }
 
-  private void closeChange(PatchSet.Id psId, String sha1, SubmissionId submissionId)
+  private void closeChange(
+      PatchSet.Id psId, String sha1, Project.NameKey destProject, SubmissionId submissionId)
       throws IOException, RepositoryNotFoundException, RestApiException, UpdateException,
           PermissionBackendException {
-    ChangeNotes changeNotes = notesFactory.createChecked(psId.changeId());
+    ChangeNotes changeNotes = notesFactory.createChecked(destProject, psId.changeId());
     permissionBackend.user(user).change(changeNotes).check(ChangePermission.READ);
     Change change = changeNotes.getChange();
     PatchSet ps = psUtil.get(changeNotes, psId);

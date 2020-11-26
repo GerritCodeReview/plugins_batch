@@ -38,8 +38,7 @@ public class ListCommand extends BaseCommand {
         new CommandRunnable() {
           @Override
           public void run() throws Exception {
-            try (DynamicOptions pluginOptions =
-                new DynamicOptions(ListCommand.this, injector, dynamicBeans)) {
+            try (DynamicOptions pluginOptions = new DynamicOptions(injector, dynamicBeans)) {
               parseCommandLine(impl, pluginOptions);
               impl.display(out);
             }
