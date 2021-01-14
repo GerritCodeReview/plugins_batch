@@ -16,6 +16,24 @@
       "message": "This does work if you build out of tree. CI doesn\u0027t do that.",
       "revId": "05d8e2b0bdab0e0cef9f962092cd691c9f2a74ec",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7da61020_45dac41b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2021-01-14T22:50:19Z",
+      "side": 1,
+      "message": "That depends: If you build it against 3.3.0 it would work. If you build it against 3.3.1 and that\u0027s we probably want, it would fail.\n\nThe way forward would be to overwrite CI vote, and adapt the code and switch bazlets to 3.3.1 sha1:\n\n  load_bazlets(\n    commit \u003d \"\u003csha1 of 3.3.1\u003e\",",
+      "parentUuid": "36626da3_254712ae",
+      "revId": "05d8e2b0bdab0e0cef9f962092cd691c9f2a74ec",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
