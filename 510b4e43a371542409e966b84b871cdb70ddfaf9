@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b3fe7d4_55eed3e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-14T23:27:41Z",
+      "side": 1,
+      "message": "I think I\u0027d prefer it as-is so it\u0027s clearer how to resolve the merge to master.\n\n@Prudhvi, can you upload a new change to stable-3.3 that fixes these issues and we can merge it up to master?",
+      "parentUuid": "148fdeff_cb1f8ce3",
+      "revId": "510b4e43a371542409e966b84b871cdb70ddfaf9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a28fbba_25bec8cb",
