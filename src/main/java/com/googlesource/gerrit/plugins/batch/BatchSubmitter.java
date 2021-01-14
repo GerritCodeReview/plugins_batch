@@ -136,20 +136,24 @@ public class BatchSubmitter {
       throws IOException, RepositoryNotFoundException, RestApiException, UpdateException,
           PermissionBackendException {
     if (dest.changes != null) {
+      Project.NameKey project = Project.nameKey(dest.project);
       // TODO: Is using the first change in the batch for each dest the correct thing to do?
       Change firstInDest =
-          notesFactory.createChecked(dest.changes.get(0).toPatchSetId().changeId()).getChange();
+          notesFactory
+              .createChecked(project, dest.changes.get(0).toPatchSetId().changeId())
+              .getChange();
       SubmissionId submissionId = new SubmissionId(firstInDest);
       for (Batch.Change change : dest.changes) {
-        closeChange(change.toPatchSetId(), dest.sha1, submissionId);
+        closeChange(project, change.toPatchSetId(), dest.sha1, submissionId);
       }
     }
   }
 
-  private void closeChange(PatchSet.Id psId, String sha1, SubmissionId submissionId)
+  private void closeChange(
+      Project.NameKey project, PatchSet.Id psId, String sha1, SubmissionId submissionId)
       throws IOException, RepositoryNotFoundException, RestApiException, UpdateException,
           PermissionBackendException {
-    ChangeNotes changeNotes = notesFactory.createChecked(psId.changeId());
+    ChangeNotes changeNotes = notesFactory.createChecked(project, psId.changeId());
     permissionBackend.user(user).change(changeNotes).check(ChangePermission.READ);
     Change change = changeNotes.getChange();
     PatchSet ps = psUtil.get(changeNotes, psId);
@@ -162,8 +166,6 @@ public class BatchSubmitter {
         || change.getStatus() == Change.Status.ABANDONED) {
       return;
     }
-    BranchNameKey destination = change.getDest();
-    Project.NameKey project = destination.project();
 
     try (TraceContext traceContext =
             TraceContext.open()
@@ -178,7 +180,7 @@ public class BatchSubmitter {
       bu.addOp(
           psId.changeId(),
           mergedByPushOpFactory.create(
-              requestScopePropagator, psId, submissionId, destination.branch(), sha1));
+              requestScopePropagator, psId, submissionId, change.getDest().branch(), sha1));
       bu.execute();
     }
   }
