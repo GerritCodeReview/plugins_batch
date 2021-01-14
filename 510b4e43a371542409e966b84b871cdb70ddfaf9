@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a28fbba_25bec8cb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/batch/BatchSubmitter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2021-01-14T23:02:35Z",
+      "side": 1,
+      "message": "I know, that\u0027s a cherry-pick, but this considered to be a bad practice to create objects in a loop. Extract it outside of the loop only once.",
+      "range": {
+        "startLine": 147,
+        "startChar": 20,
+        "endLine": 147,
+        "endChar": 49
+      },
+      "revId": "510b4e43a371542409e966b84b871cdb70ddfaf9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9bdf9aa_7c095f4c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/batch/BatchSubmitter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2021-01-14T23:02:35Z",
+      "side": 1,
+      "message": "Not needed and can be inlined on line 185.",
+      "range": {
+        "startLine": 169,
+        "startChar": 4,
+        "endLine": 169,
+        "endChar": 49
+      },
+      "revId": "510b4e43a371542409e966b84b871cdb70ddfaf9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4aada24_a420c4da",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/batch/BatchSubmitter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2021-01-14T23:02:35Z",
+      "side": 1,
+      "message": "No reason to create another project instance with the same content as the parameter passed in into this method, or just use destProject. or even rename the parameter to just be project.",
+      "range": {
+        "startLine": 170,
+        "startChar": 4,
+        "endLine": 170,
+        "endChar": 52
+      },
+      "revId": "510b4e43a371542409e966b84b871cdb70ddfaf9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
