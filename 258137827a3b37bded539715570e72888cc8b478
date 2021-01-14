@@ -16,6 +16,24 @@
       "message": "It appears to be already fixed on master in change 290002, that I haven\u0027t noticed. We probably wat to abandon this and cherry-pick change 290002 to stable-3.3 branch instead.",
       "revId": "258137827a3b37bded539715570e72888cc8b478",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87b356f6_2ff6ca8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-14T22:23:50Z",
+      "side": 1,
+      "message": "Yes, I also just noticed the WORKSPACE file on this branch is pointing to 3.3.0-SNAPSHOT, so I\u0027m going to fix that, and get 3.3.1 added to bazlets.",
+      "parentUuid": "ca960513_05d3cab1",
+      "revId": "258137827a3b37bded539715570e72888cc8b478",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
