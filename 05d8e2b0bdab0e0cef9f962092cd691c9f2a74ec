@@ -52,6 +52,24 @@
       "parentUuid": "7da61020_45dac41b",
       "revId": "05d8e2b0bdab0e0cef9f962092cd691c9f2a74ec",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92600b58_b510dee7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-14T22:57:41Z",
+      "side": 1,
+      "message": "Yes, the current SHA is 3.3.0. Bumped to 3.3.1 with the fix in 293782: Fix errors against latest Gerrit core | https://gerrit-review.googlesource.com/c/plugins/batch/+/293782",
+      "parentUuid": "1e341097_e101237d",
+      "revId": "05d8e2b0bdab0e0cef9f962092cd691c9f2a74ec",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
