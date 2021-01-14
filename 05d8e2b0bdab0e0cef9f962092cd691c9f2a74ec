@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36626da3_254712ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-14T22:40:10Z",
+      "side": 1,
+      "message": "This does work if you build out of tree. CI doesn\u0027t do that.",
+      "revId": "05d8e2b0bdab0e0cef9f962092cd691c9f2a74ec",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
