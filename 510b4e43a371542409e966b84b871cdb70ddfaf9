@@ -36,6 +36,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bc2c9ec_f8757fea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096442
+      },
+      "writtenOn": "2021-01-15T18:48:12Z",
+      "side": 1,
+      "message": "done. https://gerrit-review.googlesource.com/c/plugins/batch/+/293902",
+      "parentUuid": "5b3fe7d4_55eed3e3",
+      "revId": "510b4e43a371542409e966b84b871cdb70ddfaf9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a28fbba_25bec8cb",
