@@ -119,7 +119,7 @@ setupGroup() { # shortname longname
 }
 
 cleanup() { # [error_message]
-    rm -rf "$REPO_DIR"
+    rm -rf -- "$REPO_DIR"
 
     if [ -n "$1" ] ; then
         echo "$1, unable to perform batch tests" >&2
@@ -176,7 +176,7 @@ DEST_REF=refs/heads/$REF_BRANCH
 
 REPO_DIR=$(mktemp -d)
 trap cleanup EXIT
-q git init "$REPO_DIR"
+q git init -- "$REPO_DIR"
 
 GIT_DIR="$REPO_DIR/.git"
 HOOK_DIR="$GIT_DIR/hooks"
