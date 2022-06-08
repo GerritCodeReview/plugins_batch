@@ -16,6 +16,24 @@
       "message": "It seems that the similar changes from the follow-up change are already needed in this change.",
       "revId": "f0b315b83b7e02c7b2e5d0892e041795fde9cb08",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baa29bb6_95139209",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2022-06-08T18:37:21Z",
+      "side": 1,
+      "message": "That\u0027s because Zuul does in-tree builds always, so it\u0027s building against master, not 3.5. However, the tests are failing, so I need to fix something.",
+      "parentUuid": "0403d8fc_c56ff4d4",
+      "revId": "f0b315b83b7e02c7b2e5d0892e041795fde9cb08",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
