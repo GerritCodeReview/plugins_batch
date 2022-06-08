@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0403d8fc_c56ff4d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2022-06-08T04:38:04Z",
+      "side": 1,
+      "message": "It seems that the similar changes from the follow-up change are already needed in this change.",
+      "revId": "f0b315b83b7e02c7b2e5d0892e041795fde9cb08",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
