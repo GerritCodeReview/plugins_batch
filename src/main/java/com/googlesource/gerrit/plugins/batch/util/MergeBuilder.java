@@ -22,7 +22,6 @@ import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.concurrent.Callable;
 import org.eclipse.jgit.lib.CommitBuilder;
 import org.eclipse.jgit.lib.ObjectId;
@@ -166,8 +165,7 @@ public class MergeBuilder implements Callable<ObjectId> {
     final CommitBuilder mergeCommit = new CommitBuilder();
     mergeCommit.setTreeId(merger.getResultTreeId());
     mergeCommit.setParentIds(firstParent, secondParent);
-    mergeCommit.setAuthor(
-        user.newCommitterIdent(new Timestamp(System.currentTimeMillis()), gerrit.getTimeZone()));
+    mergeCommit.setAuthor(user.newCommitterIdent(gerrit));
     mergeCommit.setCommitter(gerrit);
     mergeCommit.setMessage(message);
     return mergeCommit;

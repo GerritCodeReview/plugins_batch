@@ -171,7 +171,7 @@ public class BatchSubmitter {
             TraceContext.open()
                 .addTag(RequestId.Type.SUBMISSION_ID, new RequestId(change.getId().toString()));
         Repository repo = repoManager.openRepository(project);
-        BatchUpdate bu = batchUpdateFactory.create(project, user, TimeUtil.nowTs());
+        BatchUpdate bu = batchUpdateFactory.create(project, user, TimeUtil.now());
         ObjectInserter ins = repo.newObjectInserter();
         ObjectReader reader = ins.newReader();
         RevWalk walk = new RevWalk(reader)) {
