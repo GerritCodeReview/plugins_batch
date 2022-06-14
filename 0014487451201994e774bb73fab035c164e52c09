@@ -51,6 +51,23 @@
       "parentUuid": "fa991986_12f952ec",
       "revId": "0014487451201994e774bb73fab035c164e52c09",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c93ce704_5f7ed651",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139741
+      },
+      "writtenOn": "2022-06-14T07:11:51Z",
+      "side": 1,
+      "message": "I have install it, and was able to `repo upload` and `submit including parents`.\nI haven\u0027t tested yet the integration with zuul.\n",
+      "revId": "0014487451201994e774bb73fab035c164e52c09",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
