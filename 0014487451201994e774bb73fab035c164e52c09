@@ -16,6 +16,23 @@
       "message": "Passes batch tests:\n\n $ ./test/test_batch_merge.sh\n Merge Change\n ----------------------------------------------\n PASSED - merge-change test\n PASSED - merge-change project test\n PASSED - merge-change ref test\n PASSED - merge-change sha1 test\n PASSED - merge-change state test\n PASSED - merge-change change_state test\n \n Batch Delete\n ----------------------------------------------\n PASSED - delete test\n PASSED - delete retry test\n \n List Batches\n ----------------------------------------------\n PASSED - ls-batches test\n PASSED - ls-batches last_modified test\n \n Independent changes, clean merge\n ----------------------------------------------\n PASSED - independent clean test\n \n Independent changes, merge conflict\n ----------------------------------------------\n PASSED - independent conflict test\n \n Dependent changes, fast forward\n ----------------------------------------------\n PASSED - dependent changes ff sha1 test\n PASSED - dependent changes ff reverse test\n PASSED - dependent changes ff missing test\n \n Batch Submit\n ----------------------------------------------\n PASSED - submit submit test\n PASSED - submit submit dest_commit test\n PASSED - submit submit state test\n PASSED - submit submit change_state test",
       "revId": "0014487451201994e774bb73fab035c164e52c09",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa991986_12f952ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139741
+      },
+      "writtenOn": "2022-06-14T05:08:02Z",
+      "side": 1,
+      "message": "Hi, thanks for the quick fix.\nI haven\u0027t tried it yet, as i do not have a \"real\" gerrit instance running, i\u0027m only investigating gerrit+zuul currently.\nDo i have to build the plugin myself and install it manually?\nI doesn\u0027t appear to be avail at https://www.gerritcodereview.com/plugins.html\n\nWhat sort of tests are needed to get this merged?",
+      "revId": "0014487451201994e774bb73fab035c164e52c09",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
